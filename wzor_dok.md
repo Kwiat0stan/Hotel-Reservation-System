@@ -16,7 +16,7 @@
 ---
 
 
-**Temat:** (zwięzła nazwa projektowanego systemu)
+**Temat:** Hotel - Rezerwacja Miejsc Noclegowych
 
 **Autorzy:** Wojciech Kwiatkowski, Adam Orzeł, Bartosz Lasoń, Kacper Kaleta
 
@@ -25,6 +25,7 @@
 # 1.  Zakres i krótki opis systemu
 
 (np. Cel projektu, słowny opis realizowanego systemu systemu)
+test
 
 
 # 2.	Wymagania i funkcje systemu
