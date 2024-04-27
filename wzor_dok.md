@@ -35,7 +35,7 @@ Rezerwacja może zostać poszerzona o dodatkowe usługi: wyżywienie, masaż, wy
 
 Zakres wynajmu wynosi od 1 doby do maksymalnie 2 tygodni.
 Rezerwacja musi zostac dokonana minimum na 48h przed zameldowaniem, aby system mógł zatwierdzić rezerwacje klienta.
-W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny lub jeśli nie, to czy będzie dostępny po 
+W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny, jeśli nie to czy jest wolny podobny pokój o szukanych wymaganiach.
 
 Na podstawie wybranego configu pokoju oraz oferty usług wyliczany będzie koszt całkowity za pobyt klienta/ów.
 Jeśli czasu pobytu będzie przekraczał tydzień zostanie doliczony rabat w wysokości 10 % od całkowitej pobytu.
