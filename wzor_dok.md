@@ -18,7 +18,7 @@
 
 **Temat:** (zwięzła nazwa projektowanego systemu)
 
-**Autorzy:** Wojciech Kwiatkowski
+**Autorzy:** Wojciech Kwiatkowski, Adam Orzeł, Bartosz Lasoń, Kacper Kaleta
 
 --- 
 
