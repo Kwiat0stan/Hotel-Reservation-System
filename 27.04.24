@@ -1,3 +1,5 @@
+# 1.  Zakres i krótki opis systemu
+
 (np. Cel projektu, słowny opis realizowanego systemu systemu)
 
 Celem projektu jest stworzenie systemu umożliwiającego ewidencjonowanie i zarządzanie rezerwacjami pokoi hotelowych.
@@ -14,9 +16,3 @@ W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny lub
 Na podstawie wybranego configu pokoju oraz oferty usług wyliczany będzie koszt całkowity za pobyt klienta/ów.
 Jeśli czasu pobytu będzie przekraczał tydzień zostanie doliczony rabat w wysokości 10 % od całkowitej pobytu.
 Rabat za czas można łączyć z pozostałymi rabatami.
-
-
-
-na zajeciach dodac to
-
-vertabelo do diagramów
