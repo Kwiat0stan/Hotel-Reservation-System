@@ -43,7 +43,7 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 
 
 
-test123321
+test123321jk mkjn kjkjnjnkjnk
 
 
 # 2.	Wymagania i funkcje systemu
