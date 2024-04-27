@@ -23,7 +23,7 @@
 --- 
 
 # 1.  Zakres i krótki opis systemu
-test test blason
+
 (np. Cel projektu, słowny opis realizowanego systemu systemu)
 
 Celem projektu jest stworzenie systemu umożliwiającego ewidencjonowanie i zarządzanie rezerwacjami pokoi hotelowych.
@@ -41,9 +41,6 @@ Na podstawie wybranego configu pokoju oraz oferty usług wyliczany będzie koszt
 Jeśli czasu pobytu będzie przekraczał tydzień zostanie doliczony rabat w wysokości 10 % od całkowitej pobytu.
 Rabat za czas można łączyć z pozostałymi rabatami.
 
-
-
-test123321jk mkjn kjkjnjnkjnk
 
 
 # 2.	Wymagania i funkcje systemu
