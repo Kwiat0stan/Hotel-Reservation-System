@@ -1,0 +1,18 @@
+# 1.  Zakres i krótki opis systemu
+
+(np. Cel projektu, słowny opis realizowanego systemu systemu)
+
+Celem projektu jest stworzenie systemu umożliwiającego ewidencjonowanie i zarządzanie rezerwacjami pokoi hotelowych.
+
+Hotel oferuje pokoje na wynajem.
+Pokoje są jedno, dwu, trzy-cztero osobowe.
+Oferują różny stopień wyposażenia: balkon, aneks, klimatyzacja, telewizor, wanna lub prysznic, możliwość palenia papierosów.
+Rezerwacja może zostać poszerzona o dodatkowe usługi: wyżywienie, masaż, wynajem rowerów.
+
+Zakres wynajmu wynosi od 1 doby do maksymalnie 2 tygodni.
+Rezerwacja musi zostac dokonana minimum na 48h przed zameldowaniem, aby system mógł zatwierdzić rezerwacje klienta.
+W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny lub jeśli nie, to czy będzie dostępny po 
+
+Na podstawie wybranego configu pokoju oraz oferty usług wyliczany będzie koszt całkowity za pobyt klienta/ów.
+Jeśli czasu pobytu będzie przekraczał tydzień zostanie doliczony rabat w wysokości 10 % od całkowitej pobytu.
+Rabat za czas można łączyć z pozostałymi rabatami.
