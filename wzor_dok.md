@@ -41,7 +41,7 @@ Na podstawie wybranego configu pokoju oraz oferty usług wyliczany będzie koszt
 Jeśli czasu pobytu będzie przekraczał tydzień zostanie doliczony rabat w wysokości 10 % od całkowitej pobytu.
 Rabat za czas można łączyć z pozostałymi rabatami.
 
-
+sdfsdfsdf
 
 # 2.	Wymagania i funkcje systemu
 
