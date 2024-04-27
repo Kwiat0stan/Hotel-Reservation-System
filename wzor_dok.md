@@ -23,7 +23,7 @@
 --- 
 
 # 1.  Zakres i krótki opis systemu
-
+test test blason
 (np. Cel projektu, słowny opis realizowanego systemu systemu)
 
 Celem projektu jest stworzenie systemu umożliwiającego ewidencjonowanie i zarządzanie rezerwacjami pokoi hotelowych.
