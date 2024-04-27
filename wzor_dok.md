@@ -18,7 +18,7 @@
 
 **Temat:** (zwięzła nazwa projektowanego systemu)
 
-**Autorzy:** (Wojciech Kwiatkowski i nazwiska autorów)
+**Autorzy:** Wojciech Kwiatkowski
 
 --- 
 
