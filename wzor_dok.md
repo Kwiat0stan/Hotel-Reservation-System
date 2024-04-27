@@ -25,7 +25,10 @@
 # 1.  Zakres i krótki opis systemu
 
 (np. Cel projektu, słowny opis realizowanego systemu systemu)
-test
+- celem projektu jest stworzenie systemu rezerwacji miejsc noclegowych w hotelu
+- zadaniem systemu będzie 
+
+
 
 
 # 2.	Wymagania i funkcje systemu
