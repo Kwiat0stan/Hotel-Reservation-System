@@ -35,9 +35,9 @@ Rezerwacja może zostać poszerzona o dodatkowe usługi: wyżywienie, masaż, wy
 
 Zakres wynajmu wynosi od 1 doby do maksymalnie 2 tygodni.
 Rezerwacja musi zostac dokonana minimum na 48h przed zameldowaniem, aby system mógł zatwierdzić rezerwacje klienta.
-W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny, jeśli nie to czy jest wolny podobny pokój o szukanych wymaganiach.
+W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny, jeśli nie to czy jest wolny podobny pokój o szukanych wymaganiach. Jeśli klient zdecyduje się przedluzyć okres wynajmu, system sprawdza czy konkretny pokój nie został uwcześnie zarezerwowany przez innego klienta w danym terminie.
 
-Na podstawie wybranego configu pokoju oraz oferty usług wyliczany będzie koszt całkowity za pobyt klienta/ów.
+Na podstawie wybranych parametrów pokoju oraz oferty usług wyliczany będzie koszt całkowity za pobyt klienta/ów.
 Jeśli czasu pobytu będzie przekraczał tydzień zostanie doliczony rabat w wysokości 10 % od całkowitej pobytu.
 Rabat za czas można łączyć z pozostałymi rabatami.
 
@@ -46,15 +46,22 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 
 (np. lista wymagań, np. historyjki użytkownika, np. przypadki użycia itp.)
 
-#### Lista wymagań: 
-- 
-
+### Lista wymagań: 
+- wyświetlanie specyfikacji pokoju
+- wyświetlanie informacji o rezerwacji 
+- wyświetlanie informacji o dostepnych pokojach w danych terminach o konkretnych parametrach
+- stworzenie raportu ??
+- dodawanie rezerwacji 
+- modyfikacja rezerwacji
+- usuwanie rezerwacji
+- obliczanie całkowitego kosztu pobytu
 
 # 3.	Projekt bazy danych
 
 ## Schemat bazy danych
 
 (diagram (rysunek) przedstawiający schemat bazy danych) 
+![Diagram](/Screenshot%202024-05-08%20at%2019.10.19.png)
 
 ## Opis poszczególnych tabel
 
