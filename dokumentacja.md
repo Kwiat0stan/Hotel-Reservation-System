@@ -24,7 +24,7 @@
 
 # 1.  Zakres i krótki opis systemu
 
-(np. Cel projektu, słowny opis realizowanego systemu systemu)
+(np. Cel projektu, słowny opis realizowanego systemu)
 
 Celem projektu jest stworzenie systemu umożliwiającego ewidencjonowanie i zarządzanie rezerwacjami pokoi hotelowych.
 
