@@ -24,27 +24,53 @@
 
 # 1.  Zakres i krótki opis systemu
 
-(np. Cel projektu, słowny opis realizowanego systemu)
+
 
 Celem projektu jest stworzenie systemu umożliwiającego ewidencjonowanie i zarządzanie rezerwacjami pokoi hotelowych.
 
 Hotel oferuje pokoje na wynajem.
 Pokoje są jedno, dwu, trzy-cztero osobowe.
-Oferują różny stopień wyposażenia: balkon, aneks, klimatyzacja, telewizor, wanna lub prysznic, możliwość palenia papierosów.
-Rezerwacja może zostać poszerzona o dodatkowe usługi: wyżywienie, masaż, wynajem rowerów.
+Oferują różny stopień wyposażenia: balkon (możliwość palenia papierosów), aneks, klimatyzacja, telewizor, wanna lub prysznic.
+Rezerwacja może zostać poszerzona o dodatkowe usługi: sauna i/lub wypożyczenie rowerów.
+Hotel oferuje trzy standardy wyżywienia: śniadanie, obiadokolacja + śniadanie, all inclusive.
 
 Zakres wynajmu wynosi od 1 doby do maksymalnie 2 tygodni.
 Rezerwacja musi zostac dokonana minimum na 48h przed zameldowaniem, aby system mógł zatwierdzić rezerwacje klienta.
-W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny, jeśli nie to czy jest wolny podobny pokój o szukanych wymaganiach. Jeśli klient zdecyduje się przedluzyć okres wynajmu, system sprawdza czy konkretny pokój nie został uwcześnie zarezerwowany przez innego klienta w danym terminie.
+W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny, jeśli nie to czy jest wolny podobny pokój o szukanych wymaganiach. Jeśli klient zdecyduje się przedłużyc okres wynajmu, system sprawdza czy konkretny pokój nie został uwcześnie zarezerwowany przez innego klienta w danym terminie.
+
+---
+
+*Informacje dla nas na podstawie których będziemy tworzyć rezerwacje w bazie danych.*
+
+**Cenna bazowa za pokój**: 150zł 
+
+**Koszty dodatkowe:**  
+- łóżko pojedyncze: 45zł  
+- łózko dwuosobowe: 70zł  
+- telewizor: 30zł  
+- balkon (możliwość palenia): 20zł  
+- aneks: 40zł  
+- wanna: 50zł  
+- klimatyzacja: 20zł  
+
+**Dodatkowe usługi:**  
+- możliwoś korzystania z sauny: 20zł 
+- wypożyczenie roweru: 30zł
+
+**Wyżywienie za dzień:**
+- śniadanie: 15zł
+- obiadokolacja + śniadanie: 40zł
+- all inclusive: 80zł
+
+---  
 
 Na podstawie wybranych parametrów pokoju oraz oferty usług wyliczany będzie koszt całkowity za pobyt klienta/ów.
-Jeśli czasu pobytu będzie przekraczał tydzień zostanie doliczony rabat w wysokości 10 % od całkowitej pobytu.
-Rabat za czas można łączyć z pozostałymi rabatami.
+Jeśli czas pobytu będzie przekraczał tydzień zostanie doliczony rabat w wysokości 10 % od całkowitej kwoty pobytu.
+Rabat za czas można łączyć z pozostałymi rabatami.  
 
 
 # 2.	Wymagania i funkcje systemu
 
-(np. lista wymagań, np. historyjki użytkownika, np. przypadki użycia itp.)
 
 ### Lista wymagań: 
 - wyświetlanie specyfikacji pokoju
@@ -56,12 +82,27 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 - usuwanie rezerwacji
 - obliczanie całkowitego kosztu pobytu
 
+### Przypadki użycia:
+1) Klient chce zapoznać się z ofertą dostępnym pokoi w konkretnym terminie.
+2) Klient chce zapoznać się z wyposażeniem wybranego pokoju.
+3) Klient chce zapoznać z dodatkowymi usługami hotelu.
+4) Klient chce zarezerwować pokój.
+5) Klient chce przedłużyć pobyt.
+6) Pracownik chce sprawdzić ilość obecnie zajętych pokoi.
+7) Właściciel chce raport z danego okresu.
+8) Klient chce dostać kwote wynajmu.
+9) Właściciel chce wiedzieć ile klientów skorzystało z jakichkolwiek rabatów w danym okresie.
+10) Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
+
+
+
 # 3.	Projekt bazy danych
 
 ## Schemat bazy danych
+ 
+![Diagram](./diagram.png)
 
-(diagram (rysunek) przedstawiający schemat bazy danych) 
-![Diagram](/Screenshot%202024-05-08%20at%2019.10.19.png)
+<!-- Na następne zajęcia -->
 
 ## Opis poszczególnych tabel
 
@@ -75,6 +116,7 @@ Nazwa tabeli: (nazwa tabeli)
 |----------------|------|------------|
 | Atrybut 1 …    |      |            |
 | Atrybut 2 …    |      |            |
+
 
 
 # 4.	Implementacja
@@ -103,3 +145,5 @@ create table tab1 (
 (dla każdego triggera należy wkleić kod polecenia definiującego trigger wraz z komentarzem)
 
 
+### Pytania
+- czy wystarczy obliczanie jednego pola, czy całą kolumna
