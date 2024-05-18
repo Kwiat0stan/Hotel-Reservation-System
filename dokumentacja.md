@@ -42,11 +42,20 @@ W czasie rezerwacji system będzie sprawdzał czy dany pokój jest dostępny, je
 
 *Informacje dla nas na podstawie których będziemy tworzyć rezerwacje w bazie danych.*
 
-**Cenna bazowa za pokój**: 150zł 
+**Cenna bazowa za rozmiar pokoju**:
+- jednoosobowe 150 zł
+- dwuosobowe 220 zł
+- trzyosobowy 300 zł
+- czteroosobowy 420 zł
 
+**Kategorie pokojów**
+- economic(bez dodatkowego wyposażenia)
+- standard (telewizor, balkon)
+- premium(standard + klimatyzacja, aneks)
+- exclusive(premium + wanna)
+
+<!-- cenny jako dane do tabeli -->
 **Koszty dodatkowe:**  
-- łóżko pojedyncze: 45zł  
-- łózko dwuosobowe: 70zł  
 - telewizor: 30zł  
 - balkon (możliwość palenia): 20zł  
 - aneks: 40zł  
@@ -99,6 +108,12 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 # 3.	Projekt bazy danych
 
 ## Schemat bazy danych
+
+<!-- dodać cenne do wybranych_usług -->
+<!-- cenna za konkretne usługi a sume sie wyliczy -->
+<!--  -->
+
+<!-- Wstawic nowe zdjecie -->
  
 ![Diagram](./diagram.png)
 
