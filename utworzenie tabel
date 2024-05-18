@@ -1,0 +1,109 @@
+CREATE TABLE [typ_pokoju] (
+  [id] integer PRIMARY KEY,
+  [id_kategoria] integer,
+  [ile_osob] integer,
+  [kwota_za_dobe] float
+)
+GO
+
+CREATE TABLE [kategorie_pokoju] (
+  [id] integer PRIMARY KEY,
+  [nazwa] nvarchar(255),
+  [czy_balkon] bool,
+  [czy_aneks] bool,
+  [czy_klimatyzacja] bool,
+  [czy_telewizor] bool,
+  [czy_wanna] bool,
+  [cena] float
+)
+GO
+
+CREATE TABLE [pokoje] (
+  [id_rezerwacji] integer,
+  [id_pokoju] integer,
+  [cena_pokojow] float,
+  PRIMARY KEY ([id_rezerwacji], [id_pokoju])
+)
+GO
+
+CREATE TABLE [rezerwacje] (
+  [id] integer PRIMARY KEY,
+  [id_klienta] integer,
+  [data_zameldowania] date,
+  [data_wymeldowania] date,
+  [data_rezerwacji] date,
+  [id_status] integer,
+  [rabat] float
+)
+GO
+
+CREATE TABLE [wyzywienie] (
+  [id_rezerwacji] integer,
+  [id_typ_wyzywienia] integer,
+  [cena_wyzywienia] float,
+  PRIMARY KEY ([id_rezerwacji], [id_typ_wyzywienia])
+)
+GO
+
+CREATE TABLE [typ_wyzywienia] (
+  [id] integer PRIMARY KEY,
+  [opis] nvarchar(255),
+  [cena] float
+)
+GO
+
+CREATE TABLE [statusy] (
+  [id] integer PRIMARY KEY,
+  [nazwa] nvarchar(255)
+)
+GO
+
+CREATE TABLE [klienci] (
+  [id] integer PRIMARY KEY,
+  [imie] nvarchar(255),
+  [nazwisko] nvarchar(255),
+  [telefon] nvarchar(255)
+)
+GO
+
+CREATE TABLE [uslugi] (
+  [id_typ_uslugi] integer,
+  [id_rezerwacji] integer,
+  [cena_uslug] float,
+  PRIMARY KEY ([id_typ_uslugi], [id_rezerwacji])
+)
+GO
+
+CREATE TABLE [typ_uslugi] (
+  [id] integer PRIMARY KEY,
+  [opis] nvarchar(255),
+  [cena] float
+)
+GO
+
+ALTER TABLE [rezerwacje] ADD FOREIGN KEY ([id_klienta]) REFERENCES [klienci] ([id])
+GO
+
+ALTER TABLE [pokoje] ADD FOREIGN KEY ([id_rezerwacji]) REFERENCES [rezerwacje] ([id])
+GO
+
+ALTER TABLE [pokoje] ADD FOREIGN KEY ([id_pokoju]) REFERENCES [typ_pokoju] ([id])
+GO
+
+ALTER TABLE [typ_pokoju] ADD FOREIGN KEY ([id_kategoria]) REFERENCES [kategorie_pokoju] ([id])
+GO
+
+ALTER TABLE [rezerwacje] ADD FOREIGN KEY ([id_status]) REFERENCES [statusy] ([id])
+GO
+
+ALTER TABLE [wyzywienie] ADD FOREIGN KEY ([id_rezerwacji]) REFERENCES [rezerwacje] ([id])
+GO
+
+ALTER TABLE [wyzywienie] ADD FOREIGN KEY ([id_typ_wyzywienia]) REFERENCES [typ_wyzywienia] ([id])
+GO
+
+ALTER TABLE [uslugi] ADD FOREIGN KEY ([id_typ_uslugi]) REFERENCES [typ_uslugi] ([id])
+GO
+
+ALTER TABLE [uslugi] ADD FOREIGN KEY ([id_rezerwacji]) REFERENCES [rezerwacje] ([id])
+GO
