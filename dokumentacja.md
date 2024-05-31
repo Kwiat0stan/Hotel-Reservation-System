@@ -366,7 +366,7 @@ ALTER TABLE rezerwacje_pokoi ADD FOREIGN KEY (id_pokoju) REFERENCES pokoje (id)
 ```
 
 ```sql
-ALTER TABLE pokoje ADD FOREIGN KEY (id_kateria) REFERENCES katerie_pokoju (id)
+ALTER TABLE pokoje ADD FOREIGN KEY (id_kateria) REFERENCES kategorie_pokoju (id)
 ```
 
 ```sql
