@@ -237,10 +237,10 @@ Nazwa tabeli: (nazwa tabeli)
 |----------------|------|------------|
 | id | int | Primary key, autoincrement |
 | nazwa | varchar | Nazwa kategorii |
-| czy_balkon | bool | Czy pokoj w danej kategorii zawiera balkon |
-| czy_aneks | bool | Czy pokoj w danej kategorii zawiera aneks |
-| czy_klimatyzacja | bool | Czy pokoj w danej kategorii zawiera klimatyzacje |
-| czy_ telewizor | bool | Czy pokoj w danej kategorii zawiera wanne |
+| czy_balkon | BIT | Czy pokoj w danej kategorii zawiera balkon |
+| czy_aneks | BIT | Czy pokoj w danej kategorii zawiera aneks |
+| czy_klimatyzacja | BIT | Czy pokoj w danej kategorii zawiera klimatyzacje |
+| czy_ telewizor | BIT | Czy pokoj w danej kategorii zawiera wanne |
 
 # 4.	Implementacja
 
@@ -343,11 +343,11 @@ CREATE TABLE pokoje (
 CREATE TABLE kategorie_pokoju (
   id integer IDENTITY(1,1) PRIMARY KEY,
   nazwa nvarchar(255),
-  czy_balkon bool,
-  czy_aneks bool,
-  czy_klimatyzacja bool,
-  czy_telewizor bool,
-  czy_wanna bool,
+  czy_balkon BIT,
+  czy_aneks BIT,
+  czy_klimatyzacja BIT,
+  czy_telewizor BIT,
+  czy_wanna BIT,
   cena money
 )
 ```
