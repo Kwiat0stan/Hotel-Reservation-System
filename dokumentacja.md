@@ -18,7 +18,7 @@
 
 **Temat:** Hotel - Rezerwacja Miejsc Noclegowych
 
-**Autorzy:** Wojciech Kwiatkowski, Adam Orzeł, Bartosz Lasoń, Kacper Kaleta
+**Autorzy:** Wojciech Kwiatkowski, Adam Orzeł, Bartosz Lasoń, Kacper Kaleta, Marcin Marszałek
 
 --- 
 
@@ -133,7 +133,7 @@ Nazwa tabeli: (nazwa tabeli)
 | data_wymeldowania | date | Data wymedlowania z pokoju |
 | data_rezerwacji | date | Data rezerwacji pokoju |
 | id_status | int | Foreign key |
-| rabat | float | Opcjonalnie doliczany rabat przy kwocie końcowej za pobyty |
+| rabat | float | Opcjonalnie doliczany rabat przy kwocie końcowej za pobyty wyrażony w % |
 
 ---
 ### Tabela wyżywienie
@@ -186,9 +186,9 @@ Nazwa tabeli: (nazwa tabeli)
 
 | Nazwa atrybutu | Typ  | Opis/Uwagi |
 |----------------|------|------------|
-| id_typ_usługi    |   integer   |     Primary Key razem z atrybutem id_rezerwacji, zawiera numer identyufikujący daną rezerwację       |
+| id_typ_uslugi    |   integer   |     Primary Key razem z atrybutem id_rezerwacji, zawiera numer identyufikujący daną rezerwację       |
 | id_rezerwacji    |   integer   |     Primary Key razem z atrybutem id_typ_usługi, zawiera numer identyfikujący daną usługę      |
-| cena_usługi    |   money   |      Atrybut określa cenę usługi dla danej rezerwacji      |
+| cena_uslugi    |   money   |      Atrybut określa cenę usługi dla danej rezerwacji      |
 
 ---
 ### Tabela typ_usług
@@ -605,7 +605,3 @@ WHERE NOT r.id_status = 1;
 ## Triggery
 
 (dla każdego triggera należy wkleić kod polecenia definiującego trigger wraz z komentarzem)
-
-
-### Pytania
-- czy wystarczy obliczanie jednego pola, czy całą kolumna
