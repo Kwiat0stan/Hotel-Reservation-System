@@ -576,7 +576,7 @@ INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
 
 ```sql
 CREATE VIEW rezerwacja AS
-SELECT r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, u.id_rezerwacji, rp.id_rezerwacji, w.id_rezerwacji, k.id, k.imie, k.nazwisko, s.id, s.nazwa, (u.cena_uslug + rp.cena_pokojow + w.cena_wyzywienia) AS kwota
+SELECT r.id as id_rezerwacji, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa, (u.cena_uslug + rp.cena_pokojow + w.cena_wyzywienia) AS kwota
 FROM rezerwacje as r
 INNER JOIN uslugi as u on r.id = u.id_rezerwacji
 INNER JOIN rezerwacje_pokoi as rp on r.id = rp.id_rezerwacji
@@ -589,7 +589,7 @@ INNER JOIN statusy as s on r.id_status = s.id
 
 ```sql
 CREATE VIEW dostepne_pokoje AS
-SELECT p.id, p.id_kategoria, p.ile_osob, p.kwota_za_dobe, k.nazwa, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, rp.id_rezerwacji, rp.id_pokoju, r.id, r.data_zameldowania, r.data_wymeldowania, r.id_status
+SELECT p.id, p.id_kategoria, p.ile_osob, p.kwota_za_dobe, k.nazwa, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, rp.id_rezerwacji, rp.id_pokoju, r.data_zameldowania, r.data_wymeldowania, r.id_status
 FROM pokoje as p
 INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
 INNER JOIN rezerwacje_pokoi as rp on p.id = rp.id_pokoju
