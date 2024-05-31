@@ -578,11 +578,11 @@ INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
 CREATE VIEW rezerwacja AS
 SELECT r.id as id_rezerwacji, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa, (u.cena_uslug + rp.cena_pokojow + w.cena_wyzywienia) AS kwota
 FROM rezerwacje as r
-INNER JOIN uslugi as u on r.id = u.id_rezerwacji
-INNER JOIN rezerwacje_pokoi as rp on r.id = rp.id_rezerwacji
-INNER JOIN wyzywienie as w on r.id = w.id_rezerwacji
-INNER JOIN klienci as k on r.id_klienta = k.id
-INNER JOIN statusy as s on r.id_status = s.id
+LEFT JOIN uslugi as u on r.id = u.id_rezerwacji
+LEFT JOIN rezerwacje_pokoi as rp on r.id = rp.id_rezerwacji
+LEFT JOIN wyzywienie as w on r.id = w.id_rezerwacji
+LEFT JOIN klienci as k on r.id_klienta = k.id
+LEFT JOIN statusy as s on r.id_status = s.id
 ```
 
 3. wyświetlanie informacji o dostepnych pokojach w danych terminach o konkretnych parametrach
