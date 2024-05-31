@@ -241,6 +241,7 @@ Nazwa tabeli: (nazwa tabeli)
 | czy_aneks | BIT | Czy pokoj w danej kategorii zawiera aneks |
 | czy_klimatyzacja | BIT | Czy pokoj w danej kategorii zawiera klimatyzacje |
 | czy_ telewizor | BIT | Czy pokoj w danej kategorii zawiera wanne |
+| cena | money | Cena danej kategorii |
 
 # 4.	Implementacja
 
@@ -332,7 +333,7 @@ CREATE TABLE rezerwacje_pokoi (
 ```sql
 CREATE TABLE pokoje (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  id_kateria integer,
+  id_kategoria integer,
   ile_osob integer,
   kwota_za_dobe money
 )
@@ -366,7 +367,7 @@ ALTER TABLE rezerwacje_pokoi ADD FOREIGN KEY (id_pokoju) REFERENCES pokoje (id)
 ```
 
 ```sql
-ALTER TABLE pokoje ADD FOREIGN KEY (id_kateria) REFERENCES kategorie_pokoju (id)
+ALTER TABLE pokoje ADD FOREIGN KEY (id_kategoria) REFERENCES kategorie_pokoju (id)
 ```
 
 ```sql
@@ -395,93 +396,73 @@ ALTER TABLE uslugi ADD FOREIGN KEY (id_rezerwacji) REFERENCES rezerwacje (id)
 **TABELA TYP_USlUGI**
 
 ```sql
-INSERT INTO typ_usługi
-VALUES (rower, 20.0000)
-INSERT INTO typ_usługi
-VALUES (sauna, 30.0000)
+INSERT INTO typ_uslugi
+VALUES
+('rower', 20.0000),
+('sauna', 30.0000)
 ```
 **TABELA USŁUGI**
 ```sql
-INSERT INTO usługi
-VALUES (5, 2, 30.0000)
-INSERT INTO usługi
-VALUES (13, 2, 30.0000)
-INSERT INTO usługi
-VALUES (13, 1, 20.0000)
-INSERT INTO usługi
-VALUES (14, 1, 20.0000)
-INSERT INTO usługi
-VALUES (20, 2, 30.0000)
+INSERT INTO uslugi
+VALUES
+(2, 5, 30.0000),
+(2, 13, 30.0000),
+(1, 13, 20.0000),
+(1, 14, 20.0000),
+(2, 20, 30.0000)
 ```
 
 **TABELA KLIENCI**
 ```sql
 INSERT INTO klienci
-VALUES (Albert, Nowak, +48 912 345 678)
-INSERT INTO klienci
-VALUES (Bożydar, Kowal, +48 923 456 789)
-INSERT INTO klienci
-VALUES (Monika, Orzeł, +48 934 567 890)
-INSERT INTO klienci
-VALUES (Bartosz, Zelek, +48 945 678 901)
-INSERT INTO klienci
-VALUES (Julia, Pajor, +48 956 789 012)
-INSERT INTO klienci
-VALUES (Stefania, Filipek, +48 967 890 123)
-INSERT INTO klienci
-VALUES (Andrzej, Jędrzejek, +48 978 901 234)
-INSERT INTO klienci
-VALUES (Bartłomiej, Matras, +48 989 012 345)
-INSERT INTO klienci
-VALUES (Ewa, Bukowiec, +48 991 123 456)
-INSERT INTO klienci
-VALUES (Marta, Szyszka, +48 992 234 567)
-INSERT INTO klienci
-VALUES (Izabela, Pieniążek, +48 993 345 678)
-INSERT INTO klienci
-VALUES (Karolina, Ząbek, +48 994 456 789)
-INSERT INTO klienci
-VALUES (Piotr, Kowalik, +48 995 567 890)
-INSERT INTO klienci
-VALUES (Jan, Uryga, +48 996 678 901)
-INSERT INTO klienci
-VALUES (Adam, Dudek, +48 997 789 012)
-INSERT INTO klienci
-VALUES (Kacper, Dutka, +48 998 890 123)
-INSERT INTO klienci
-VALUES (Wojciech, Pociecha, +48 999 901 234)
-INSERT INTO klienci
-VALUES (Marcin, Franczak, +48 912 012 345)
-INSERT INTO klienci
-VALUES (Beata, Piegza, +48 923 123 456)
-INSERT INTO klienci
-VALUES (Agata, Wojcieszak, +48 934 234 567)
+VALUES
+('Albert', 'Nowak', '+48 912 345 678'),
+('Bożydar', 'Kowal', '+48 923 456 789'),
+('Monika', 'Orzeł', '+48 934 567 890'),
+('Bartosz', 'Zelek', '+48 945 678 901'),
+('Julia', 'Pajor', '+48 956 789 012'),
+('Stefania', 'Filipek', '+48 967 890 123'),
+('Andrzej', 'Jędrzejek', '+48 978 901 234'),
+('Bartłomiej', 'Matras', '+48 989 012 345'),
+('Ewa', 'Bukowiec', '+48 991 123 456'),
+('Marta', 'Szyszka', '+48 992 234 567'),
+('Izabela', 'Pieniążek', '+48 993 345 678'),
+('Karolina', 'Ząbek', '+48 994 456 789'),
+('Piotr', 'Kowalik', '+48 995 567 890'),
+('Jan', 'Uryga', '+48 996 678 901'),
+('Adam', 'Dudek', '+48 997 789 012'),
+('Kacper', 'Dutka', '+48 998 890 123'),
+('Wojciech', 'Pociecha', '+48 999 901 234'),
+('Marcin', 'Franczak', '+48 912 012 345'),
+('Beata', 'Piegza', '+48 923 123 456'),
+('Agata', 'Wojcieszak', '+48 934 234 567')
 ```
 
 **tabela statusy**
 
 ```sql
-INSERT INTO statusy (id, nazwa) VALUES 
-(1, 'Rezerwacja'),
-(2, 'Odrzucona'),
-(3, 'Zrealizowana');
+INSERT INTO statusy
+VALUES 
+('anulowane'),
+('nieopłacone'),
+('opłacone')
 ```
 
 **Tabela typ_wyzywienia**
 
 ```sql
-INSERT INTO
-typ_wyzywienia (opis, cena)
-VALUES ("sniadanie", 15.00),
-VALUES ("obiadokolacja + sniadanie", 40.00),
-VALUES ("all inclusive", 80.00);
+INSERT INTO typ_wyzywienia
+VALUES
+('sniadanie', 15.00),
+('obiadokolacja + sniadanie', 40.00),
+('all inclusive', 80.00);
 ```
 
 **Tabela wyzywienie**
 
 ```sql
 INSERT INTO
-wyzywienie (id_rezerwacji, id_typ_wyzywienia, cena_wyzywienia)
+wyzywienie
 VALUES
 (1, 1, 15),
 (2, 1, 15),
@@ -491,43 +472,43 @@ VALUES
 
 **Tabela kategorie_pokoju**
 ```sql
-INSERT INTO kategorie_pokoju (nazwa, czy_balkon, czy_aneks, czy_klimatyzacja, czy_telewizor, czy_wanna)
+INSERT INTO kategorie_pokoju
 VALUES 
-(1, 'Economic', 0, 0, 0, 0, 0),
-(2, 'Standard', 1, 0, 0, 1, 0),
-(3, 'Premium', 1, 1, 1, 1, 0),
-(4, 'Exclusive', 1, 1, 1, 1, 1); 
+('Economic', 0, 0, 0, 0, 0, 0),
+('Standard', 1, 0, 0, 1, 0, 50),
+('Premium', 1, 1, 1, 1, 0, 110),
+('Exclusive', 1, 1, 1, 1, 1, 160); 
 ```
 
 **Tabela pokoje**
 ```sql
-INSERT INTO pokoje (id, id_kategoria, ile_osob, kwota_za_dobe)
+INSERT INTO pokoje
 VALUES 
 -- Economic rooms
-(1, 1, 1, 100.00),
-(2, 1, 2, 150.00),
-(3, 1, 3, 200.00),
-(4, 1, 4, 250.00),
+(1, 1, 100.00),
+(1, 2, 150.00),
+(1, 3, 200.00),
+(1, 4, 250.00),
 -- Standard rooms
-(5, 2, 1, 150.00),
-(6, 2, 2, 200.00),
-(7, 2, 3, 250.00),
-(8, 2, 4, 300.00),
+(2, 1, 150.00),
+(2, 2, 200.00),
+(2, 3, 250.00),
+(2, 4, 300.00),
 -- Premium rooms
-(9, 3, 1, 200.00),
-(10, 3, 2, 250.00),
-(11, 3, 3, 300.00),
-(12, 3, 4, 350.00),
+(3, 1, 200.00),
+(3, 2, 250.00),
+(3, 3, 300.00),
+(3, 4, 350.00),
 -- Exclusive rooms
-(13, 4, 1, 250.00),
-(14, 4, 2, 300.00),
-(15, 4, 3, 350.00),
-(16, 4, 4, 400.00);
+(4, 1, 250.00),
+(4, 2, 300.00),
+(4, 3, 350.00),
+(4, 4, 400.00);
 ```
 
 **Tabela rezerwacje_pokoi**
 ```sql
-INSERT INTO rezerwacje_pokoi (id_rezerwacji, id_pokoju, cena_pokojow)
+INSERT INTO rezerwacje_pokoi
 VALUES 
 (1, 1, 150.00),  -- Economic, jednoosobowy
 (1, 5, 200.00),  -- Standard, dwuosobowy
@@ -549,6 +530,33 @@ VALUES
 (9, 6, 330.00),  -- Standard, dwuosobowy (+50 zł za balkon)
 (10, 2, 270.00),-- Standard, jednoosobowy (+50 zł za balkon)
 (10, 7, 510.00);-- Premium, dwuosobowy (+110 zł za klimatyzację i aneks)
+```
+
+
+**Tabela rezerwacje**
+```sql
+INSERT INTO rezerwacje
+VALUES
+(1, '2023-11-11', '2023-11-15', '2023-10-10', 3, 0),
+(2, '2023-11-12', '2023-11-15', '2023-11-05', 3, 5),
+(3, '2023-11-15', '2023-11-20', '2023-10-30', 3, 0),
+(4, '2023-12-15', '2023-12-18', '2023-12-14', 1, 0),
+(5, '2023-12-16', '2023-12-18', '2023-10-12', 3, 0),
+(6, '2024-01-06', '2024-01-07', '2023-12-28', 3, 0),
+(7, '2024-01-07', '2024-01-10', '2024-01-02', 3, 0),
+(8, '2024-01-07', '2024-01-11', '2024-01-03', 1, 3),
+(9, '2024-01-12', '2024-01-18', '2024-01-06', 3, 0),
+(10, '2024-02-01', '2024-02-05', '2024-01-26', 1, 0),
+(11, '2024-02-16', '2024-02-20', '2024-02-04', 3, 5),
+(12, '2024-03-02', '2024-03-05', '2024-02-24', 3, 0),
+(13, '2024-03-02', '2024-03-05', '2024-02-24', 3, 0),
+(14, '2024-03-12', '2024-03-17', '2024-03-06', 3, 0),
+(15, '2024-04-12', '2024-03-25', '2024-03-30', 3, 10),
+(16, '2024-05-01', '2024-05-06', '2024-04-20', 3, 5),
+(17, '2024-05-05', '2024-05-08', '2024-05-01', 3, 0),
+(18, '2024-05-05', '2024-05-08', '2024-05-01', 3, 0),
+(19, '2024-05-20', '2024-05-25', '2024-05-15', 3, 0),
+(20, '2024-05-20', '2024-05-30', '2024-06-02', 2, 0);
 ```
 
 ## Widoki
