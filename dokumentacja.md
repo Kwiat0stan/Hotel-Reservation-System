@@ -252,7 +252,7 @@ Nazwa tabeli: (nazwa tabeli)
 #### Tabela rezerwacje
 ```sql
 CREATE TABLE rezerwacje (
-  id integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id integer IDENTITY(1,1) PRIMARY KEY,
   id_klienta integer,
   data_zameldowania date,
   data_wymeldowania date,
@@ -275,7 +275,7 @@ CREATE TABLE wyzywienie (
 #### Tabela typ_wyzywienia
 ```sql
 CREATE TABLE typ_wyzywienia (
-  id integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id integer IDENTITY(1,1) PRIMARY KEY,
   opis nvarchar(255),
   cena money
 )
@@ -284,7 +284,7 @@ CREATE TABLE typ_wyzywienia (
 #### Tabela klienci
 ```sql
 CREATE TABLE klienci (
-  id integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id integer IDENTITY(1,1) PRIMARY KEY,
   imie nvarchar(255),
   nazwisko nvarchar(255),
   telefon nvarchar(255)
@@ -294,7 +294,7 @@ CREATE TABLE klienci (
 #### Tabela statusy
 ```sql
 CREATE TABLE statusy (
-  id integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id integer IDENTITY(1,1) PRIMARY KEY,
   nazwa nvarchar(255)
 )
 ```
@@ -312,7 +312,7 @@ CREATE TABLE uslugi (
 #### Tabela typ_uslugi
 ```sql
 CREATE TABLE typ_uslugi (
-  id integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id integer IDENTITY(1,1) PRIMARY KEY,
   opis nvarchar(255),
   cena money
 )
@@ -331,7 +331,7 @@ CREATE TABLE rezerwacje_pokoi (
 #### Tabela pokoje
 ```sql
 CREATE TABLE pokoje (
-  id integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id integer IDENTITY(1,1) PRIMARY KEY,
   id_kateria integer,
   ile_osob integer,
   kwota_za_dobe money
@@ -341,7 +341,7 @@ CREATE TABLE pokoje (
 #### Tabela kategorie_pokoju
 ```sql
 CREATE TABLE kategorie_pokoju (
-  id integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id integer IDENTITY(1,1) PRIMARY KEY,
   nazwa nvarchar(255),
   czy_balkon bool,
   czy_aneks bool,
