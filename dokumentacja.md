@@ -561,6 +561,8 @@ VALUES
 
 ## Widoki
 
+-- dodać screeny do widoków
+
 (dla każdego widoku należy wkleić kod polecenia definiującego widok wraz z komentarzem)
 
 1. wyświetlanie specyfikacji pokoju
