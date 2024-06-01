@@ -4,3 +4,4 @@
 - Adam Orzeł
 - Bartosz Lasoń
 - Kacper Kaleta
+- Marcin Marszałek
