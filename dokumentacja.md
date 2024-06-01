@@ -393,7 +393,7 @@ ALTER TABLE uslugi ADD FOREIGN KEY (id_rezerwacji) REFERENCES rezerwacje (id)
 ## Dane do tabel
 *Na moment tworzenia dokumentacji, ze względu na brak możliwości dostępu do bazy danych morfeusz, dołączamy inserty danych do poszczególnych tabel*
 
-**TABELA TYP_USlUGI**
+**TABELA TYP_USLUGI**
 
 ```sql
 INSERT INTO typ_uslugi
