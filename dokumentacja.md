@@ -243,6 +243,19 @@ Nazwa tabeli: (nazwa tabeli)
 | czy_ telewizor | BIT | Czy pokoj w danej kategorii zawiera wanne |
 | cena | money | Cena danej kategorii |
 
+---
+### Tabela typ_pokoju
+
+**Opis**: Tabela kategorie_pokoju przechowuje informacje o typach pokoi dostępnych w obiekcie hotelowym. Każdy typ jest przeznaczony dla danej ilości osób.
+
+
+
+| Nazwa atrybutu | Typ  | Opis/Uwagi |
+|----------------|------|------------|
+| id | int | Primary key, autoincrement |
+| ile_osob | int | Ilość osób |
+| cena | money | Cena danego typu |
+
 # 4.	Implementacja
 
 ## Kod poleceń DDL
@@ -350,6 +363,15 @@ CREATE TABLE kategorie_pokoju (
   czy_telewizor BIT,
   czy_wanna BIT,
   cena money
+)
+```
+
+#### Tabela typ pokoju
+```sql
+CREATE TABLE typ_pokoju (
+  id integer IDENTITY(1,1) PRIMARY KEY,
+  [ile_osob] nvarchar(255),
+  [cena] money
 )
 ```
 
