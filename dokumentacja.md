@@ -414,8 +414,22 @@ ALTER TABLE uslugi ADD FOREIGN KEY (id_typ_uslugi) REFERENCES typ_uslugi (id)
 ALTER TABLE uslugi ADD FOREIGN KEY (id_rezerwacji) REFERENCES rezerwacje (id)
 ```
 
+```sql
+ALTER TABLE pokoje ADD FOREIGN KEY (id_typ_pokoju) REFERENCES typ_pokoju (id)
+```
+
 ## Dane do tabel
-*Na moment tworzenia dokumentacji, ze względu na brak możliwości dostępu do bazy danych morfeusz, dołączamy inserty danych do poszczególnych tabel*
+
+**Tabela typ_pokoju**
+
+```sql
+INSERT INTO typ_pokoju
+VALUES
+('jednoosobowe', 150.0),
+('dwuosobowe', 220.0),
+('trzyosobowy', 300.0),
+('czteroosobowy', 420.0)
+```
 
 **TABELA TYP_USLUGI**
 
