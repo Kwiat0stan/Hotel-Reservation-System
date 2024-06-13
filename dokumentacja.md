@@ -217,7 +217,7 @@ Nazwa tabeli: (nazwa tabeli)
 ---
 ### Tabela pokoje
 
-**Opis**: Tabela pokoje przechowuje informacje o poszczególnych pokojach dostępnych w obiekcie hotelowym. Każdy pokój jest przypisany do określonej kategorii i ma zdefiniowane atrybuty, takie jak liczba osób, które mogą w nim przebywać oraz koszt wynajmu za dobę.
+**Opis**: Tabela pokoje przechowuje informacje o poszczególnych pokojach dostępnych w obiekcie hotelowym. Każdy pokój jest przypisany do określonej kategorii i konkretnego typu pokoju.
 
 | Nazwa atrybutu | Typ  | Opis/Uwagi |
 |----------------|------|------------|
@@ -544,26 +544,10 @@ VALUES
 ```sql
 INSERT INTO rezerwacje_pokoi
 VALUES 
-(1, 1, 150.00),  
-(1, 5, 200.00),  
-(2, 2, 270.00),  
-(2, 6, 330.00),  
-(3, 3, 410.00),  
-(3, 7, 510.00),  
-(4, 4, 530.00),  
-(4, 8, 640.00),  
-(5, 9, 410.00),  
-(5, 13, 570.00), 
-(6, 10, 520.00), 
-(6, 14, 660.00), 
-(7, 11, 610.00), 
-(7, 15, 780.00), 
-(8, 12, 850.00), 
-(8, 16, 1020.00),
-(9, 1, 150.00),  
-(9, 6, 330.00),  
-(10, 2, 270.00),
-(10, 7, 510.00)
+
+(id rezerwacji 11-20, 1-16, )
+
+
 ```
 
 
