@@ -272,7 +272,7 @@ CREATE TABLE rezerwacje (
   data_wymeldowania date,
   data_rezerwacji date,
   id_status integer,
-  rabat float
+  rabat numeric
 )
 ```
 
