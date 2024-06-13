@@ -282,17 +282,18 @@ CREATE TABLE rezerwacje (
 CREATE TABLE wyzywienie (
   id_rezerwacji integer,
   id_typ_wyzywienia integer,
-  cena_wyzywienia money,
-  PRIMARY KEY (id_rezerwacji, id_typ_wyzywienia)
-)
+  cena_wyzywienia money CHECK (cena_wyzywienia > 0),
+  PRIMARY KEY (id_rezerwacji, id_typ_wyzywienia),
+);
+
 ```
 
 #### Tabela typ_wyzywienia
 ```sql
 CREATE TABLE typ_wyzywienia (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  opis nvarchar(255),
-  cena money
+  opis nvarchar(30),
+  cena money CHECK (cena > 0)
 )
 ```
 
@@ -300,9 +301,9 @@ CREATE TABLE typ_wyzywienia (
 ```sql
 CREATE TABLE klienci (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  imie nvarchar(255),
-  nazwisko nvarchar(255),
-  telefon nvarchar(255)
+  imie nvarchar(12),
+  nazwisko nvarchar(15),
+  telefon nvarchar(15)
 )
 ```
 
@@ -310,7 +311,7 @@ CREATE TABLE klienci (
 ```sql
 CREATE TABLE statusy (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  nazwa nvarchar(255)
+  nazwa nvarchar(11)
 )
 ```
 
@@ -319,7 +320,7 @@ CREATE TABLE statusy (
 CREATE TABLE uslugi (
   id_typ_uslugi integer,
   id_rezerwacji integer,
-  cena_uslug money,
+  cena_uslug money CHECK (cena_uslug > 0),
   PRIMARY KEY (id_typ_uslugi, id_rezerwacji)
 )
 ```
@@ -328,8 +329,8 @@ CREATE TABLE uslugi (
 ```sql
 CREATE TABLE typ_uslugi (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  opis nvarchar(255),
-  cena money
+  opis nvarchar(5),
+  cena money CHECK (cena > 0)
 )
 ```
 
@@ -338,7 +339,7 @@ CREATE TABLE typ_uslugi (
 CREATE TABLE rezerwacje_pokoi (
   id_rezerwacji integer,
   id_pokoju integer,
-  cena_pokojow money,
+  cena_pokojow money CHECK (cena_pokojow > 0),
   PRIMARY KEY (id_rezerwacji, id_pokoju)
 )
 ```
@@ -349,7 +350,7 @@ CREATE TABLE pokoje (
   id integer IDENTITY(1,1) PRIMARY KEY,
   id_kategoria integer,
   ile_osob integer,
-  kwota_za_dobe money
+  kwota_za_dobe money CHECK (kwota_za_dobe > 0)
 )
 ```
 
@@ -357,13 +358,13 @@ CREATE TABLE pokoje (
 ```sql
 CREATE TABLE kategorie_pokoju (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  nazwa nvarchar(255),
+  nazwa nvarchar(9),
   czy_balkon BIT,
   czy_aneks BIT,
   czy_klimatyzacja BIT,
   czy_telewizor BIT,
   czy_wanna BIT,
-  cena money
+  cena money CHECK (cena > 0)
 )
 ```
 
@@ -371,8 +372,8 @@ CREATE TABLE kategorie_pokoju (
 ```sql
 CREATE TABLE typ_pokoju (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  [ile_osob] nvarchar(255),
-  [cena] money
+  ile_osob nvarchar(20),
+  cena money CHECK (cena > 0)
 )
 ```
 
