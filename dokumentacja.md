@@ -595,7 +595,7 @@ INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
 2. wyświetlanie informacji o rezerwacji 
 
 ```sql
-SELECT r.id AS id_rezerwacji, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa as status, rp.id_pokoju,COALESCE(SUM(u.cena_uslug), 0) + COALESCE(SUM(rp.cena_pokojow), 0) + COALESCE(SUM(w.cena_wyzywienia), 0) AS kwota
+SELECT r.id AS id_rezerwacji, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa as status, rp.id_pokoju, ABS((COALESCE(SUM(u.cena_uslug), 0) + COALESCE(SUM(rp.cena_pokojow), 0) + COALESCE(SUM(w.cena_wyzywienia), 0)) * DATEDIFF(day,r.data_wymeldowania, r.data_zameldowania)) AS kwota
 FROM rezerwacje AS r
 LEFT JOIN uslugi AS u ON r.id = u.id_rezerwacji
 LEFT JOIN rezerwacje_pokoi AS rp ON r.id = rp.id_rezerwacji
@@ -603,7 +603,6 @@ LEFT JOIN wyzywienie AS w ON r.id = w.id_rezerwacji
 INNER JOIN klienci AS k ON r.id_klienta = k.id
 INNER JOIN statusy AS s ON r.id_status = s.id
 GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa, rp.id_pokoju;
-
 ```
 
 3. wyświetlanie informacji o dostepnych pokojach w danych terminach o konkretnych parametrach
