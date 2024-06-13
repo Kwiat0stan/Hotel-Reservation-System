@@ -349,7 +349,7 @@ CREATE TABLE pokoje (
   id integer IDENTITY(1,1) PRIMARY KEY,
   id_kategoria integer,
   ile_osob integer,
-  kwota_za_dobe money CHECK (kwota_za_dobe > 0)
+  id_typ_pokoju integer
 )
 ```
 
