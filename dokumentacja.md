@@ -363,7 +363,7 @@ CREATE TABLE kategorie_pokoju (
   czy_klimatyzacja BIT,
   czy_telewizor BIT,
   czy_wanna BIT,
-  cena money CHECK (cena > 0)
+  cena money CHECK (cena >= 0)
 )
 ```
 
