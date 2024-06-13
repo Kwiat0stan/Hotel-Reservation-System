@@ -272,8 +272,9 @@ CREATE TABLE rezerwacje (
   data_wymeldowania date,
   data_rezerwacji date,
   id_status integer,
-  rabat numeric
-)
+  rabat numeric CHECK (rabat >= 0 AND rabat <= 100)
+);
+
 ```
 
 #### Tabela wyzywienie
