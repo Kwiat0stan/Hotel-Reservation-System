@@ -221,7 +221,7 @@ Nazwa tabeli: (nazwa tabeli)
 
 | Nazwa atrybutu | Typ  | Opis/Uwagi |
 |----------------|------|------------|
-| id | int | Primary key |
+| id | int | Primary key, Auto increment |
 | id_kategoia | int | Numer kategorii pokoju |
 | id_typ_pokoju | int | Numer typu pokoju |
 
