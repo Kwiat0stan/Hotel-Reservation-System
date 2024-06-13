@@ -579,7 +579,6 @@ VALUES
 
 ## Widoki
 
--- dodać screeny do widoków
 
 (dla każdego widoku należy wkleić kod polecenia definiującego widok wraz z komentarzem)
 
@@ -591,6 +590,8 @@ SELECT k.nazwa, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, 
 FROM pokoje as p
 INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
 ```
+
+![specyfikacja](./specyfikacja_pokoju.png)
 
 2. wyświetlanie informacji o rezerwacji 
 
@@ -604,6 +605,8 @@ INNER JOIN klienci AS k ON r.id_klienta = k.id
 INNER JOIN statusy AS s ON r.id_status = s.id
 GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa, rp.id_pokoju;
 ```
+
+![specyfikacja](./rezerwacja.png)
 
 3. wyświetlanie informacji o dostepnych pokojach w danych terminach o konkretnych parametrach
    Jako, że SQL nie obsługuje widoków z parametrami, należy wywoływać dane terminy i konkretne parametry na kwerendzie SELECT * FROM dostepne_pokoje z dodatkowymi warunkami WHERE. W poniższym przypadku program obsługujący bazę danych wywołuje zapytanie wyświetlenia widoku pokojów z balkonem, aneksem i między 6 stycznia 2024r. i 10 stycznia 2024r.
