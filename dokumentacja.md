@@ -217,14 +217,13 @@ Nazwa tabeli: (nazwa tabeli)
 ---
 ### Tabela pokoje
 
-**Opis**: Tabela pokoje przechowuje informacje o poszczególnych pokojach dostępnych w obiekcie hotelowym. Każdy pokój jest przypisany do określonej kategorii i ma zdefiniowane atrybuty, takie jak liczba osób, które mogą w nim przebywać oraz koszt wynajmu za dobę.
+**Opis**: Tabela pokoje przechowuje informacje o poszczególnych pokojach dostępnych w obiekcie hotelowym. Każdy pokój jest przypisany do określonej kategorii i konkretnego typu pokoju.
 
 | Nazwa atrybutu | Typ  | Opis/Uwagi |
 |----------------|------|------------|
 | id | int | Primary key |
 | id_kategoia | int | Numer kategorii pokoju |
-| ile_osob | int | Atrybut określający iloosobowy jest pokoj |
-| kwota_za_dobe | money | Kwota jaką trzeba zapłacić za jedną dobe hotelwoą |
+| id_typ_pokoju | int | Numer typu pokoju |
 
 ---
 ### Tabela kategorie_pokoju
@@ -246,7 +245,7 @@ Nazwa tabeli: (nazwa tabeli)
 ---
 ### Tabela typ_pokoju
 
-**Opis**: Tabela kategorie_pokoju przechowuje informacje o typach pokoi dostępnych w obiekcie hotelowym. Każdy typ jest przeznaczony dla danej ilości osób.
+**Opis**: Dodac opis
 
 
 
@@ -272,8 +271,9 @@ CREATE TABLE rezerwacje (
   data_wymeldowania date,
   data_rezerwacji date,
   id_status integer,
-  rabat float
-)
+  rabat numeric CHECK (rabat >= 0 AND rabat <= 100)
+);
+
 ```
 
 #### Tabela wyzywienie
@@ -281,17 +281,18 @@ CREATE TABLE rezerwacje (
 CREATE TABLE wyzywienie (
   id_rezerwacji integer,
   id_typ_wyzywienia integer,
-  cena_wyzywienia money,
-  PRIMARY KEY (id_rezerwacji, id_typ_wyzywienia)
-)
+  cena_wyzywienia money CHECK (cena_wyzywienia > 0),
+  PRIMARY KEY (id_rezerwacji, id_typ_wyzywienia),
+);
+
 ```
 
 #### Tabela typ_wyzywienia
 ```sql
 CREATE TABLE typ_wyzywienia (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  opis nvarchar(255),
-  cena money
+  opis nvarchar(30),
+  cena money CHECK (cena > 0)
 )
 ```
 
@@ -299,9 +300,9 @@ CREATE TABLE typ_wyzywienia (
 ```sql
 CREATE TABLE klienci (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  imie nvarchar(255),
-  nazwisko nvarchar(255),
-  telefon nvarchar(255)
+  imie nvarchar(12),
+  nazwisko nvarchar(15),
+  telefon nvarchar(15)
 )
 ```
 
@@ -309,7 +310,7 @@ CREATE TABLE klienci (
 ```sql
 CREATE TABLE statusy (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  nazwa nvarchar(255)
+  nazwa nvarchar(11)
 )
 ```
 
@@ -318,7 +319,7 @@ CREATE TABLE statusy (
 CREATE TABLE uslugi (
   id_typ_uslugi integer,
   id_rezerwacji integer,
-  cena_uslug money,
+  cena_uslug money CHECK (cena_uslug > 0),
   PRIMARY KEY (id_typ_uslugi, id_rezerwacji)
 )
 ```
@@ -327,8 +328,8 @@ CREATE TABLE uslugi (
 ```sql
 CREATE TABLE typ_uslugi (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  opis nvarchar(255),
-  cena money
+  opis nvarchar(5),
+  cena money CHECK (cena > 0)
 )
 ```
 
@@ -337,7 +338,7 @@ CREATE TABLE typ_uslugi (
 CREATE TABLE rezerwacje_pokoi (
   id_rezerwacji integer,
   id_pokoju integer,
-  cena_pokojow money,
+  cena_pokojow money CHECK (cena_pokojow > 0),
   PRIMARY KEY (id_rezerwacji, id_pokoju)
 )
 ```
@@ -348,7 +349,7 @@ CREATE TABLE pokoje (
   id integer IDENTITY(1,1) PRIMARY KEY,
   id_kategoria integer,
   ile_osob integer,
-  kwota_za_dobe money
+  id_typ_pokoju integer
 )
 ```
 
@@ -356,13 +357,13 @@ CREATE TABLE pokoje (
 ```sql
 CREATE TABLE kategorie_pokoju (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  nazwa nvarchar(255),
+  nazwa nvarchar(9),
   czy_balkon BIT,
   czy_aneks BIT,
   czy_klimatyzacja BIT,
   czy_telewizor BIT,
   czy_wanna BIT,
-  cena money
+  cena money CHECK (cena > 0)
 )
 ```
 
@@ -370,8 +371,8 @@ CREATE TABLE kategorie_pokoju (
 ```sql
 CREATE TABLE typ_pokoju (
   id integer IDENTITY(1,1) PRIMARY KEY,
-  [ile_osob] nvarchar(255),
-  [cena] money
+  ile_osob nvarchar(20),
+  cena money CHECK (cena > 0)
 )
 ```
 
@@ -412,10 +413,24 @@ ALTER TABLE uslugi ADD FOREIGN KEY (id_typ_uslugi) REFERENCES typ_uslugi (id)
 ALTER TABLE uslugi ADD FOREIGN KEY (id_rezerwacji) REFERENCES rezerwacje (id)
 ```
 
-## Dane do tabel
-*Na moment tworzenia dokumentacji, ze względu na brak możliwości dostępu do bazy danych morfeusz, dołączamy inserty danych do poszczególnych tabel*
+```sql
+ALTER TABLE pokoje ADD FOREIGN KEY (id_typ_pokoju) REFERENCES typ_pokoju (id)
+```
 
-**TABELA TYP_USlUGI**
+## Dane do tabel
+
+**Tabela typ_pokoju**
+
+```sql
+INSERT INTO typ_pokoju
+VALUES
+('jednoosobowe', 150.0),
+('dwuosobowe', 220.0),
+('trzyosobowy', 300.0),
+('czteroosobowy', 420.0)
+```
+
+**TABELA TYP_USLUGI**
 
 ```sql
 INSERT INTO typ_uslugi
@@ -506,52 +521,33 @@ VALUES
 ```sql
 INSERT INTO pokoje
 VALUES 
--- Economic rooms
-(1, 1, 100.00),
-(1, 2, 150.00),
-(1, 3, 200.00),
-(1, 4, 250.00),
--- Standard rooms
-(2, 1, 150.00),
-(2, 2, 200.00),
-(2, 3, 250.00),
-(2, 4, 300.00),
--- Premium rooms
-(3, 1, 200.00),
-(3, 2, 250.00),
-(3, 3, 300.00),
-(3, 4, 350.00),
--- Exclusive rooms
-(4, 1, 250.00),
-(4, 2, 300.00),
-(4, 3, 350.00),
-(4, 4, 400.00);
+
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(3, 1,),
+(3, 2,),
+(3, 3,),
+(3, 4,),
+(4, 1),
+(4, 2),
+(4, 3),
+(4, 4);
 ```
 
 **Tabela rezerwacje_pokoi**
 ```sql
 INSERT INTO rezerwacje_pokoi
 VALUES 
-(1, 1, 150.00),  -- Economic, jednoosobowy
-(1, 5, 200.00),  -- Standard, dwuosobowy
-(2, 2, 270.00),  -- Standard, jednoosobowy (+50 zł za balkon)
-(2, 6, 330.00),  -- Standard, dwuosobowy (+50 zł za balkon)
-(3, 3, 410.00),  -- Premium, jednoosobowy (+110 zł za klimatyzację i aneks)
-(3, 7, 510.00),  -- Premium, dwuosobowy (+110 zł za klimatyzację i aneks)
-(4, 4, 530.00),  -- Premium, trzyosobowy (+110 zł za klimatyzację i aneks)
-(4, 8, 640.00),  -- Premium, czteroosobowy (+110 zł za klimatyzację i aneks)
-(5, 9, 410.00),  -- Exclusive, jednoosobowy (+160 zł za wannę)
-(5, 13, 570.00), -- Exclusive, dwuosobowy (+160 zł za wannę)
-(6, 10, 520.00), -- Exclusive, trzyosobowy (+160 zł za wannę)
-(6, 14, 660.00), -- Exclusive, czteroosobowy (+160 zł za wannę)
-(7, 11, 610.00), -- Economic, trzyosobowy
-(7, 15, 780.00), -- Economic, czteroosobowy
-(8, 12, 850.00), -- Standard, trzyosobowy (+50 zł za balkon)
-(8, 16, 1020.00),-- Standard, czteroosobowy (+50 zł za balkon)
-(9, 1, 150.00),  -- Economic, jednoosobowy
-(9, 6, 330.00),  -- Standard, dwuosobowy (+50 zł za balkon)
-(10, 2, 270.00),-- Standard, jednoosobowy (+50 zł za balkon)
-(10, 7, 510.00);-- Premium, dwuosobowy (+110 zł za klimatyzację i aneks)
+
+(id rezerwacji 11-20, 1-16, )
+
+
 ```
 
 
@@ -583,12 +579,14 @@ VALUES
 
 ## Widoki
 
+-- dodać screeny do widoków
+
 (dla każdego widoku należy wkleić kod polecenia definiującego widok wraz z komentarzem)
 
 1. wyświetlanie specyfikacji pokoju
 
 ```sql
-CREATE VIEW specyfikacja_pokoju AS
+CREATE VIEW vw_specyfikacja_pokoju AS
 SELECT k.nazwa, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, k.cena, p.ile_osob, p.kwota_za_dobe
 FROM pokoje as p
 INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
@@ -605,6 +603,7 @@ LEFT JOIN wyzywienie AS w ON r.id = w.id_rezerwacji
 INNER JOIN klienci AS k ON r.id_klienta = k.id
 INNER JOIN statusy AS s ON r.id_status = s.id
 GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa, rp.id_pokoju;
+
 ```
 
 3. wyświetlanie informacji o dostepnych pokojach w danych terminach o konkretnych parametrach
@@ -612,7 +611,7 @@ GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_re
    np. select * from dostepne_pokoje where czy_balkon = 1 AND czy_aneks = 1 and data_zameldowania NOT BETWEEN '2024-01-06' AND '2024-01-10'
 
 ```sql
-CREATE VIEW dostepne_pokoje AS
+CREATE VIEW vw_dostepne_pokoje AS
 SELECT p.id, p.id_kategoria, p.ile_osob, p.kwota_za_dobe, k.nazwa, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, rp.id_rezerwacji, rp.id_pokoju, r.data_zameldowania, r.data_wymeldowania, r.id_status
 FROM pokoje as p
 INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
