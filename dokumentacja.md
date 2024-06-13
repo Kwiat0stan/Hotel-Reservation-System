@@ -348,7 +348,6 @@ CREATE TABLE rezerwacje_pokoi (
 CREATE TABLE pokoje (
   id integer IDENTITY(1,1) PRIMARY KEY,
   id_kategoria integer,
-  ile_osob integer,
   id_typ_pokoju integer
 )
 ```
