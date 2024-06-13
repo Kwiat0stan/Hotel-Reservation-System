@@ -497,13 +497,23 @@ VALUES
 **Tabela wyzywienie**
 
 ```sql
-INSERT INTO
-wyzywienie
+INSERT INTO wyzywienie
 VALUES
 (1, 1, 15),
 (2, 1, 15),
 (3, 2, 40),
-(4, 3, 80);
+(4, 3, 80),
+(5, 2, 40),
+(7, 2, 40),
+(9, 1, 15),
+(10, 3, 80),
+(11, 3, 80),
+(12, 3, 80),
+(13, 1, 15),
+(14, 2, 40),
+(17, 1, 15),
+(19, 3, 80),
+(20, 2, 40);
 ```
 
 **Tabela kategorie_pokoju**
