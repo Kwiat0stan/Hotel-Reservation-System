@@ -621,9 +621,11 @@ VALUES
 
 ```sql
 CREATE VIEW vw_specyfikacja_pokoju AS
-SELECT k.nazwa, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, k.cena, p.ile_osob, p.kwota_za_dobe
+SELECT p.id, k.nazwa, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, tp.ile_osob, (tp.cena + kp.cena) AS kwota
 FROM pokoje as p
 INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
+INNER JOIN typ_pokoju as tp on p.id_typ_pokoju = tp.id
+INNER JOIN kategorie_pokoju as kp on p.id_kategoria = kp.id
 ```
 
 ![specyfikacja](./specyfikacja_pokoju.png)
@@ -631,6 +633,7 @@ INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
 2. wyświetlanie informacji o rezerwacji 
 
 ```sql
+CREATE VIEW vw_rezerwacja AS
 SELECT r.id AS id_rezerwacji, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa as status, rp.id_pokoju, ABS((COALESCE(SUM(u.cena_uslug), 0) + COALESCE(SUM(rp.cena_pokojow), 0) + COALESCE(SUM(w.cena_wyzywienia), 0)) * DATEDIFF(day,r.data_wymeldowania, r.data_zameldowania)) AS kwota
 FROM rezerwacje AS r
 LEFT JOIN uslugi AS u ON r.id = u.id_rezerwacji
@@ -649,11 +652,13 @@ GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_re
 
 ```sql
 CREATE VIEW vw_dostepne_pokoje AS
-SELECT p.id, p.id_kategoria, p.ile_osob, p.kwota_za_dobe, k.nazwa, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, rp.id_rezerwacji, rp.id_pokoju, r.data_zameldowania, r.data_wymeldowania, r.id_status
+SELECT p.id, (tp.cena + kp.cena) AS kwota, k.nazwa, tp.ile_osob, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, rp.id_rezerwacji, rp.id_pokoju, r.data_zameldowania, r.data_wymeldowania, r.id_status
 FROM pokoje as p
 INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
 INNER JOIN rezerwacje_pokoi as rp on p.id = rp.id_pokoju
 INNER JOIN rezerwacje as r on rp.id_rezerwacji = r.id
+INNER JOIN typ_pokoju as tp on p.id_typ_pokoju = tp.id
+INNER JOIN kategorie_pokoju as kp on p.id_kategoria = kp.id
 WHERE NOT r.id_status = 1;
 ```
 
