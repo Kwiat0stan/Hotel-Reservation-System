@@ -223,8 +223,7 @@ Nazwa tabeli: (nazwa tabeli)
 |----------------|------|------------|
 | id | int | Primary key |
 | id_kategoia | int | Numer kategorii pokoju |
-| ile_osob | int | Atrybut określający iloosobowy jest pokoj |
-| kwota_za_dobe | money | Kwota jaką trzeba zapłacić za jedną dobe hotelwoą |
+| id_typ_pokoju | int | Numer typu pokoju |
 
 ---
 ### Tabela kategorie_pokoju
@@ -246,7 +245,7 @@ Nazwa tabeli: (nazwa tabeli)
 ---
 ### Tabela typ_pokoju
 
-**Opis**: Tabela kategorie_pokoju przechowuje informacje o typach pokoi dostępnych w obiekcie hotelowym. Każdy typ jest przeznaczony dla danej ilości osób.
+**Opis**: Dodac opis
 
 
 
@@ -548,26 +547,26 @@ VALUES
 ```sql
 INSERT INTO rezerwacje_pokoi
 VALUES 
-(1, 1, 150.00),  -- Economic, jednoosobowy
-(1, 5, 200.00),  -- Standard, dwuosobowy
-(2, 2, 270.00),  -- Standard, jednoosobowy (+50 zł za balkon)
-(2, 6, 330.00),  -- Standard, dwuosobowy (+50 zł za balkon)
-(3, 3, 410.00),  -- Premium, jednoosobowy (+110 zł za klimatyzację i aneks)
-(3, 7, 510.00),  -- Premium, dwuosobowy (+110 zł za klimatyzację i aneks)
-(4, 4, 530.00),  -- Premium, trzyosobowy (+110 zł za klimatyzację i aneks)
-(4, 8, 640.00),  -- Premium, czteroosobowy (+110 zł za klimatyzację i aneks)
-(5, 9, 410.00),  -- Exclusive, jednoosobowy (+160 zł za wannę)
-(5, 13, 570.00), -- Exclusive, dwuosobowy (+160 zł za wannę)
-(6, 10, 520.00), -- Exclusive, trzyosobowy (+160 zł za wannę)
-(6, 14, 660.00), -- Exclusive, czteroosobowy (+160 zł za wannę)
-(7, 11, 610.00), -- Economic, trzyosobowy
-(7, 15, 780.00), -- Economic, czteroosobowy
-(8, 12, 850.00), -- Standard, trzyosobowy (+50 zł za balkon)
-(8, 16, 1020.00),-- Standard, czteroosobowy (+50 zł za balkon)
-(9, 1, 150.00),  -- Economic, jednoosobowy
-(9, 6, 330.00),  -- Standard, dwuosobowy (+50 zł za balkon)
-(10, 2, 270.00),-- Standard, jednoosobowy (+50 zł za balkon)
-(10, 7, 510.00);-- Premium, dwuosobowy (+110 zł za klimatyzację i aneks)
+(1, 1, 150.00),  
+(1, 5, 200.00),  
+(2, 2, 270.00),  
+(2, 6, 330.00),  
+(3, 3, 410.00),  
+(3, 7, 510.00),  
+(4, 4, 530.00),  
+(4, 8, 640.00),  
+(5, 9, 410.00),  
+(5, 13, 570.00), 
+(6, 10, 520.00), 
+(6, 14, 660.00), 
+(7, 11, 610.00), 
+(7, 15, 780.00), 
+(8, 12, 850.00), 
+(8, 16, 1020.00),
+(9, 1, 150.00),  
+(9, 6, 330.00),  
+(10, 2, 270.00),
+(10, 7, 510.00)
 ```
 
 
