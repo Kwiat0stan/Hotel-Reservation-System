@@ -713,6 +713,8 @@ end;
 
 **Opis:** *Procedura ta na podstawie widoku vw_dostepne_pokoje wyswietla dostepne pokoje o podanej ilosci osob w danym zakresie cenowym. Uwaga: Rozwiązać problem duplikujących się pokoi.*
 
+exec p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 'jednoosobowe', 150, 200
+
 ![proc dostepne pokoje o podanej ilosci i cenie](./procedura-dostepne-pokoje-podanej-osobo-i-cenie.png)
 
 ### Funkcje
