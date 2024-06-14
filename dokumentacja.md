@@ -645,9 +645,7 @@ GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_re
 
 ![specyfikacja](./rezerwacja.png)
 
-3. wyświetlanie informacji o dostepnych pokojach w danych terminach o konkretnych parametrach
-   Jako, że SQL nie obsługuje widoków z parametrami, należy wywoływać dane terminy i konkretne parametry na kwerendzie SELECT * FROM dostepne_pokoje z dodatkowymi warunkami WHERE. W poniższym przypadku program obsługujący bazę danych wywołuje zapytanie wyświetlenia widoku pokojów z balkonem, aneksem i między 6 stycznia 2024r. i 10 stycznia 2024r.
-   np. select * from dostepne_pokoje where czy_balkon = 1 AND czy_aneks = 1 and data_zameldowania NOT BETWEEN '2024-01-06' AND '2024-01-10'
+3. Wyświetlanie informacji o dostępnych pokojach w danym momencie biorąc pod uwage 48 godzinny czas zatwierdzenia rezerwacji.
 
 ```sql
 CREATE   VIEW [dbo].[vw_dostepne_pokoje] AS
