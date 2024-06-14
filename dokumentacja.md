@@ -133,7 +133,7 @@ Nazwa tabeli: (nazwa tabeli)
 | data_wymeldowania | date | Data wymedlowania z pokoju |
 | data_rezerwacji | date | Data rezerwacji pokoju |
 | id_status | int | Foreign key |
-| rabat | float | Opcjonalnie doliczany rabat przy kwocie końcowej za pobyty wyrażony w % |
+| rabat | numeric | Opcjonalnie doliczany rabat przy kwocie końcowej za pobyty wyrażony w % |
 
 ---
 ### Tabela wyżywienie
