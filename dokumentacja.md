@@ -711,10 +711,32 @@ begin
 end;
 ```
 
-**Opis:** *Pocedura ta na podstawie widoku vw_dostepne_pokoje wyswietla dostepne pokoje o podanej ilosci osob w danym zakresie cenowym.*
-
+**Opis:** *Procedura ta na podstawie widoku vw_dostepne_pokoje wyswietla dostepne pokoje o podanej ilosci osob w danym zakresie cenowym. Uwaga: Rozwiązać problem duplikujących się pokoi.*
 
 ![proc dostepne pokoje o podanej ilosci i cenie](./procedura-dostepne-pokoje-podanej-osobo-i-cenie.png)
+
+### Funkcje
+
+**Obliczanie całkowitego kosztu rezerwacji**
+
+```sql
+CREATE FUNCTION calkowity_koszt (@id_rezerwacji INT)
+RETURNS MONEY 
+AS BEGIN   
+DECLARE @ckoszt MONEY;
+SELECT @ckoszt = ISNULL(SUM(u.cena_uslug), 0) + ISNULL(SUM(rp.cena_pokojow), 0) + ISNULL(SUM(w.cena_wyzywienia), 0) 
+    FROM rezerwacje r
+    LEFT JOIN uslugi u ON r.id = u.id_rezerwacji
+    LEFT JOIN rezerwacje_pokoi rp ON r.id = rp.id_rezerwacji
+    LEFT JOIN wyzywienie w ON r.id = w.id_rezerwacji
+    WHERE r.id = @id_rezerwacji;
+
+    RETURN @ckoszt;   
+	END; 
+```
+
+**Opis:** *Funkcja sumuje koszty usług, pokoi oraz wyżywienia z rezerwacji, używa do tego JOIN aby połączyć tabele rezerwacji, usługi, rezerwacje_pokoi i wyżywienia. Sumuje koluny z kosztami, jeżeli któraś z kolumn nie zawiera danych wstawia 0.*
+
 
 ## Triggery
 
