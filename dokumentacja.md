@@ -245,14 +245,13 @@ Nazwa tabeli: (nazwa tabeli)
 ---
 ### Tabela typ_pokoju
 
-**Opis**: Dodac opis
-
+**Opis**: Tabela typ_pokoju przechowuje informacje o różnych typach pokoi dostępnych w hotelu. Zawiera dane dotyczące liczby osób, które mogą przebywać w pokoju, oraz ceny za poszczególny typ pokoju.
 
 
 | Nazwa atrybutu | Typ  | Opis/Uwagi |
 |----------------|------|------------|
 | id | int | Primary key, autoincrement |
-| ile_osob | int | Ilość osób |
+| ile_osob | nvarchar | Ilość osób |
 | cena | money | Cena danego typu |
 
 # 4.	Implementacja
