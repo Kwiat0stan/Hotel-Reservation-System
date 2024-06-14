@@ -687,6 +687,10 @@ end;
 
 **Opis:** *Procedura ta przy wykorzystaniu widoku vw_rezerwacja wyswietla informacje o rezerwacjach posiadajacych wybrany status.*
 
+![rezerwacje o podanym statusie](./proc-rezerwacja-status.png)
+
+![rezerwacje o podanym statusie](./rezerwacja-status-error.png)
+
 ## Triggery
 
 (dla każdego triggera należy wkleić kod polecenia definiującego trigger wraz z komentarzem)
