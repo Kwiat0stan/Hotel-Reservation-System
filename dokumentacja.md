@@ -650,7 +650,7 @@ GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_re
    np. select * from dostepne_pokoje where czy_balkon = 1 AND czy_aneks = 1 and data_zameldowania NOT BETWEEN '2024-01-06' AND '2024-01-10'
 
 ```sql
-CREATE VIEW vw_dostepne_pokoje AS
+CREATE   VIEW [dbo].[vw_dostepne_pokoje] AS
 SELECT p.id, (tp.cena + kp.cena) AS kwota, k.nazwa, tp.ile_osob, k.czy_balkon, k.czy_aneks, k.czy_klimatyzacja, k.czy_telewizor, k.czy_wanna, rp.id_rezerwacji, rp.id_pokoju, r.data_zameldowania, r.data_wymeldowania, r.id_status
 FROM pokoje as p
 INNER JOIN kategorie_pokoju as k on p.id_kategoria = k.id
@@ -658,7 +658,7 @@ INNER JOIN rezerwacje_pokoi as rp on p.id = rp.id_pokoju
 INNER JOIN rezerwacje as r on rp.id_rezerwacji = r.id
 INNER JOIN typ_pokoju as tp on p.id_typ_pokoju = tp.id
 INNER JOIN kategorie_pokoju as kp on p.id_kategoria = kp.id
-WHERE NOT r.id_status = 1;
+WHERE DATEADD(DAY, 2, GETDATE()) NOT BETWEEN r.data_zameldowania AND r.data_wymeldowania
 ```
 
 
@@ -696,7 +696,7 @@ end;
 
 ```sql
 create procedure p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 
-@ilosc_osob char(1120), @min_kwota money, @max_kwota money
+@ilosc_osob char(20), @min_kwota money, @max_kwota money
 as
 begin
     if @min_kwota > @max_kwota
