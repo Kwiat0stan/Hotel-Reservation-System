@@ -667,6 +667,26 @@ WHERE NOT r.id_status = 1;
 
 (dla każdej procedury/funkcji należy wkleić kod polecenia definiującego procedurę wraz z komentarzem)
 
+### Procedury
+
+---
+**Rezerwacja o podanym statusie**
+```sql
+create or alter procedure p_rezerwacja_o_podanym_statusie 
+@status_rezerwacji char(11)
+as
+begin
+    if not exists (select * from statusy where nazwa = @status_rezerwacji)
+        throw 50001, 'Nie ma takiego statusu', 1;
+	
+    select *
+	from vw_rezerwacja
+	where status = @status_rezerwacji
+end;
+```
+
+**Opis:** *Procedura ta przy wykorzystaniu widoku vw_rezerwacja wyswietla informacje o rezerwacjach posiadajacych wybrany status.*
+
 ## Triggery
 
 (dla każdego triggera należy wkleić kod polecenia definiującego trigger wraz z komentarzem)
