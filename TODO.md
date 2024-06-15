@@ -7,4 +7,4 @@ Bartek L - prcedura dodaj usluge
 Kacper - procedura rezerwacji, dodanie klienta  
   
 
-Trzeba dodać więcej zamówień do tabeli rezerwacje 
+Trzeba dodać więcej zamówień do tabeli rezerwacje .
