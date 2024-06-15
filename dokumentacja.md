@@ -667,6 +667,32 @@ WHERE DATEADD(DAY, 2, GETDATE()) NOT BETWEEN r.data_zameldowania AND r.data_wyme
 ### Procedury
 
 ---
+**Dodawanie rezerwacji** - do poprawienia
+```sql
+CREATE PROCEDURE p_dodanie_rezerwacji
+@imie nvarchar(12), @nazwisko nvarchar(15), @telefon nvarchar(15), @data_zameldowania date, @data_wymeldowania date, @id_status int, @rabat int
+as
+begin
+	if @data_zameldowania >= @data_wymeldowania
+	throw 50001, 'Data zameldowania musi być wcześniejsza niż wymeldowania', 1;
+	if ABS(DATEDIFF(day,GETDATE(),@data_zameldowania))<2
+	throw 50001, 'Rezerwacja musi zostac dokonana minimum na 48h przed zameldowaniem', 1;
+	if ABS(DATEDIFF(day, @data_zameldowania, @data_wymeldowania))>14
+	throw 50001, 'Okres rezerwacji nie może być dłuższy niż 14 dni', 1;
+	if(ABS(DATEDIFF(day, @data_zameldowania, @data_wymeldowania))>7
+	@rabat = @rabat + 10;
+
+	INSERT INTO klienci
+	VALUES(@imie, @nazwisko, @telefon);
+
+	SET @id_klienta = SCOPE_IDENTITY();
+
+	INSERT INTO rezerwacje
+	VALUES(@id_klienta, @data_zameldowania, data_zameldowania, GETDATE(), @id_status, @rabat);
+end;
+```sql
+
+---
 **Rezerwacja o podanym statusie**
 ```sql
 create or alter procedure p_rezerwacja_o_podanym_statusie 
