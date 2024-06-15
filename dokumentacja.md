@@ -374,7 +374,7 @@ CREATE TABLE typ_pokoju (
 )
 ```
 
-## Relacje
+## Związki
 ```sql
 ALTER TABLE rezerwacje ADD FOREIGN KEY (id_klienta) REFERENCES klienci (id)
 ```
