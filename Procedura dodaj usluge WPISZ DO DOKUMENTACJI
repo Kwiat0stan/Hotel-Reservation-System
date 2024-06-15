@@ -1,0 +1,11 @@
+create or alter procedure [dbo].[dodaj_usluge]
+@opis nvarchar(5),
+@cena money
+as
+begin
+insert into typ_uslugi (opis, cena)
+values (@opis, @cena);
+end
+
+
+
