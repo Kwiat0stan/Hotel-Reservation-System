@@ -746,19 +746,34 @@ exec p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 'jednoosobowe',
 **Obliczanie całkowitego kosztu rezerwacji**
 
 ```sql
-CREATE FUNCTION calkowity_koszt (@id_rezerwacji INT)
+CREATE FUNCTION [dbo].[calkowity_koszt] (@id_rezerwacji INT)
 RETURNS MONEY 
 AS BEGIN   
 DECLARE @ckoszt MONEY;
-SELECT @ckoszt = ISNULL(SUM(u.cena_uslug), 0) + ISNULL(SUM(rp.cena_pokojow), 0) + ISNULL(SUM(w.cena_wyzywienia), 0) 
+DECLARE @rabat DECIMAL;
+
+----------------------------------------------------------------------------------
+DECLARE @liczba_dni INT;
+ SELECT @liczba_dni = DATEDIFF(DAY, r.data_zameldowania, r.data_wymeldowania),@rabat = r.rabat
+    FROM rezerwacje r
+    WHERE r.id = @id_rezerwacji;
+----------------------------------------------------------------------------------
+
+ SELECT @ckoszt = ISNULL(SUM(u.cena_uslug), 0) + ISNULL(SUM(rp.cena_pokojow*@liczba_dni), 0) + ISNULL(SUM(w.cena_wyzywienia*@liczba_dni), 0) 
     FROM rezerwacje r
     LEFT JOIN uslugi u ON r.id = u.id_rezerwacji
     LEFT JOIN rezerwacje_pokoi rp ON r.id = rp.id_rezerwacji
     LEFT JOIN wyzywienie w ON r.id = w.id_rezerwacji
     WHERE r.id = @id_rezerwacji;
 
+	    SET @ckoszt = @ckoszt * (1 - @rabat / 100.0);
+
     RETURN @ckoszt;   
 	END; 
+-----------------/*Wyświetlenie*/-----------------
+GO 
+select dbo.calkowity_koszt(20) as calkowity_koszt /*( ) - id_rezerwacji*/
+GO
 ```
 
 **Opis:** *Funkcja sumuje koszty usług, pokoi oraz wyżywienia z rezerwacji, używa do tego JOIN aby połączyć tabele rezerwacji, usługi, rezerwacje_pokoi i wyżywienia. Sumuje koluny z kosztami, jeżeli któraś z kolumn nie zawiera danych wstawia 0.*
