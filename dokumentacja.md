@@ -664,11 +664,12 @@ WHERE DATEADD(DAY, 2, GETDATE()) NOT BETWEEN r.data_zameldowania AND r.data_wyme
 
 (dla każdej procedury/funkcji należy wkleić kod polecenia definiującego procedurę wraz z komentarzem)
 
-### Procedury
+## Procedury
 
----
-**Dodawanie rezerwacji** - do poprawienia
+### Dodawanie rezerwacji - do poprawienia
+
 ```sql
+
 CREATE PROCEDURE p_dodanie_rezerwacji
 @imie nvarchar(12), @nazwisko nvarchar(15), @telefon nvarchar(15), @data_zameldowania date, @data_wymeldowania date, @id_status int, @rabat int
 as
@@ -690,11 +691,19 @@ begin
 	INSERT INTO rezerwacje
 	VALUES(@id_klienta, @data_zameldowania, data_zameldowania, GETDATE(), @id_status, @rabat);
 end;
-```sql
+
+```
+
+**Opis:** TODO: Dodanie opisu
+
+TODO: Dodanie screena
 
 ---
-**Rezerwacja o podanym statusie**
+
+### Rezerwacja o podanym statusie
+
 ```sql
+
 create or alter procedure p_rezerwacja_o_podanym_statusie 
 @status_rezerwacji char(11)
 as
@@ -706,6 +715,7 @@ begin
 	from vw_rezerwacja
 	where status = @status_rezerwacji
 end;
+
 ```
 
 **Opis:** *Procedura ta przy wykorzystaniu widoku vw_rezerwacja wyswietla informacje o rezerwacjach posiadajacych wybrany status.*
@@ -716,9 +726,10 @@ end;
 
 ---
 
-**Dostępne pokoje o podanej ilości osób w danym zakresie cenowym**
+### Dostępne pokoje o podanej ilości osób w danym zakresie cenowym
 
 ```sql
+
 create procedure p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 
 @ilosc_osob char(20), @min_kwota money, @max_kwota money
 as
@@ -733,19 +744,21 @@ begin
 	where ile_osob = @ilosc_osob
         and kwota between @min_kwota and @max_kwota
 end;
+
 ```
 
 **Opis:** *Procedura ta na podstawie widoku vw_dostepne_pokoje wyswietla dostepne pokoje o podanej ilosci osob w danym zakresie cenowym. Uwaga: Rozwiązać problem duplikujących się pokoi.*
 
-exec p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 'jednoosobowe', 150, 200
+**Komenda:** exec p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 'jednoosobowe', 150, 200
 
 ![proc dostepne pokoje o podanej ilosci i cenie](./screeny/procedura-dostepne-pokoje-podanej-osobo-i-cenie.png)
 
-### Funkcje
+## Funkcje
 
-**Obliczanie całkowitego kosztu rezerwacji**
+### Obliczanie całkowitego kosztu rezerwacji
 
 ```sql
+
 CREATE FUNCTION [dbo].[calkowity_koszt] (@id_rezerwacji INT)
 RETURNS MONEY 
 AS BEGIN   
@@ -774,10 +787,12 @@ DECLARE @liczba_dni INT;
 GO 
 select dbo.calkowity_koszt(20) as calkowity_koszt /*( ) - id_rezerwacji*/
 GO
+
 ```
 
 **Opis:** *Funkcja sumuje koszty usług, pokoi oraz wyżywienia z rezerwacji, używa do tego JOIN aby połączyć tabele rezerwacji, usługi, rezerwacje_pokoi i wyżywienia. Sumuje koluny z kosztami, jeżeli któraś z kolumn nie zawiera danych wstawia 0.*
 
+TODO: Dodanie screena
 
 ## Triggery
 

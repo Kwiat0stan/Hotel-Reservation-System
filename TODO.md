@@ -11,6 +11,11 @@ Wojciech K:
     - zaktualizowanie nazewnictwa plików  
     - zaktualizowanie ścieżek do plików  
     - uporządkowanie repo  
+
+**Others:** 
+- poprawnić procedure dodawanie rezerwacji
+- dodanie opisu i screena do procedury dodawanie rezerwacji
+- dodanie screena do Obliczanie całkowitego kosztu rezerwacji
            
 Bartek L - prcedura dodaj usluge  
 Kacper - procedura rezerwacji, dodanie klienta  
