@@ -816,3 +816,6 @@ GO
 **Opis:** Trigger ten zapewnia integralność danych w tabeli klienci, eliminując możliwość występowania zduplikowanych rekordów klientów.
 
 ![Wykorzystanie trg_zapobiegaj_duplikacji_klientow](./trigger%20zapobiegaj_duplikacji_klientow.png)
+
+---
+
