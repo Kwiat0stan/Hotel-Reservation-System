@@ -16,6 +16,8 @@ Wojciech K:
 - poprawnić procedure dodawanie rezerwacji
 - dodanie opisu i screena do procedury dodawanie rezerwacji
 - dodanie screena do Obliczanie całkowitego kosztu rezerwacji
+- sprawdzić czy on działą
+- dodać screena dostepne_pokoje.png
            
 Bartek L - prcedura dodaj usluge  
 Kacper - procedura rezerwacji, dodanie klienta  

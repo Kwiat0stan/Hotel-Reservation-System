@@ -659,6 +659,10 @@ INNER JOIN kategorie_pokoju as kp on p.id_kategoria = kp.id
 WHERE DATEADD(DAY, 2, GETDATE()) NOT BETWEEN r.data_zameldowania AND r.data_wymeldowania
 ```
 
+TODO: 
+- sprawdzić czy on działą
+- dodać screena dostepne_pokoje.png
+
 
 ## Procedury/funkcje
 
