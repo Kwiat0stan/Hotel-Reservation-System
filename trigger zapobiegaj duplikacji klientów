@@ -1,4 +1,4 @@
-REATE TRIGGER trg_zapobiegaj_duplikacji_klientow
+CREATE TRIGGER trg_zapobiegaj_duplikacji_klientow
 ON klienci
 INSTEAD OF INSERT
 AS
