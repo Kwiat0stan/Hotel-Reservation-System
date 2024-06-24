@@ -17,7 +17,9 @@ Wojciech K:
 
 - ~~zaktualizowanie ścieżek do plików~~  
 
-- ~~uporządkowanie repo~~  
+- ~~uporządkowanie repo~~
+
+- dodanie f_ do funkcji całkowity koszt   
 
 **Others:** 
 - poprawnić procedure dodawanie rezerwacji  
