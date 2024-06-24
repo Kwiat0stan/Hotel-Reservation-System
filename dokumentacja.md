@@ -718,7 +718,7 @@ end;
 
 ```
 
-**Opis:** *Procedura ta przy wykorzystaniu widoku vw_rezerwacja wyswietla informacje o rezerwacjach posiadajacych wybrany status.*
+**Opis:** Procedura ta przy wykorzystaniu widoku vw_rezerwacja wyswietla informacje o rezerwacjach posiadajacych wybrany status.
 
 ![rezerwacje o podanym statusie](./screeny/proc-rezerwacja-status.png)
 
@@ -747,11 +747,33 @@ end;
 
 ```
 
-**Opis:** *Procedura ta na podstawie widoku vw_dostepne_pokoje wyswietla dostepne pokoje o podanej ilosci osob w danym zakresie cenowym. Uwaga: Rozwiązać problem duplikujących się pokoi.*
+**Opis:** Procedura ta na podstawie widoku vw_dostepne_pokoje wyswietla dostepne pokoje o podanej ilosci osob w danym zakresie cenowym. Uwaga: Rozwiązać problem duplikujących się pokoi.
 
 **Komenda:** exec p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 'jednoosobowe', 150, 200
 
 ![proc dostepne pokoje o podanej ilosci i cenie](./screeny/procedura-dostepne-pokoje-podanej-osobo-i-cenie.png)
+
+---
+
+### Dodawanie usługi
+
+```sql
+
+create or alter procedure [dbo].[p_dodaj_usluge]
+@opis nvarchar(5),
+@cena money
+as
+begin
+insert into typ_uslugi (opis, cena)
+values (@opis, @cena);
+end
+
+```
+
+**Opis:** Procedura p_dodaj_usluge służy do dodawania nowej usługi do tabeli typ_uslugi. Przyjmuje dwa parametry: opis usługi oraz jej cenę.
+
+![Screen dodawania usłgui](./screeny/proc-dodaj-usluge.png)
+
 
 ## Funkcje
 
@@ -790,7 +812,7 @@ GO
 
 ```
 
-**Opis:** *Funkcja sumuje koszty usług, pokoi oraz wyżywienia z rezerwacji, używa do tego JOIN aby połączyć tabele rezerwacji, usługi, rezerwacje_pokoi i wyżywienia. Sumuje koluny z kosztami, jeżeli któraś z kolumn nie zawiera danych wstawia 0.*
+**Opis:** Funkcja sumuje koszty usług, pokoi oraz wyżywienia z rezerwacji, używa do tego JOIN aby połączyć tabele rezerwacji, usługi, rezerwacje_pokoi i wyżywienia. Sumuje koluny z kosztami, jeżeli któraś z kolumn nie zawiera danych wstawia 0.
 
 TODO: Dodanie screena
 

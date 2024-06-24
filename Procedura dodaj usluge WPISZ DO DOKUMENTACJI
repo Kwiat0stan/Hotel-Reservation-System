@@ -6,6 +6,3 @@ begin
 insert into typ_uslugi (opis, cena)
 values (@opis, @cena);
 end
-
-
-
