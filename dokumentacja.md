@@ -108,7 +108,7 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 
 <!-- Wstawic nowe zdjecie -->
  
-![Diagram](./diagram.png)
+![Diagram](./screeny/diagram.png)
 
 <!-- Na następne zajęcia -->
 
@@ -627,7 +627,7 @@ INNER JOIN typ_pokoju as tp on p.id_typ_pokoju = tp.id
 INNER JOIN kategorie_pokoju as kp on p.id_kategoria = kp.id
 ```
 
-![specyfikacja](./specyfikacja_pokoju.png)
+![specyfikacja](./screeny/specyfikacja_pokoju.png)
 
 2. wyświetlanie informacji o rezerwacji 
 
@@ -643,7 +643,7 @@ INNER JOIN statusy AS s ON r.id_status = s.id
 GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_rezerwacji, r.id_status, r.rabat, k.imie, k.nazwisko, s.nazwa, rp.id_pokoju;
 ```
 
-![specyfikacja](./rezerwacja.png)
+![specyfikacja](./screeny/rezerwacja.png)
 
 3. Wyświetlanie informacji o dostępnych pokojach w danym momencie biorąc pod uwage 48 godzinny czas zatwierdzenia rezerwacji.
 
@@ -710,9 +710,9 @@ end;
 
 **Opis:** *Procedura ta przy wykorzystaniu widoku vw_rezerwacja wyswietla informacje o rezerwacjach posiadajacych wybrany status.*
 
-![rezerwacje o podanym statusie](./proc-rezerwacja-status.png)
+![rezerwacje o podanym statusie](./screeny/proc-rezerwacja-status.png)
 
-![rezerwacje o podanym statusie](./rezerwacja-status-error.png)
+![rezerwacje o podanym statusie](./screeny/rezerwacja-status-error.png)
 
 ---
 
@@ -739,7 +739,7 @@ end;
 
 exec p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 'jednoosobowe', 150, 200
 
-![proc dostepne pokoje o podanej ilosci i cenie](./procedura-dostepne-pokoje-podanej-osobo-i-cenie.png)
+![proc dostepne pokoje o podanej ilosci i cenie](./screeny/procedura-dostepne-pokoje-podanej-osobo-i-cenie.png)
 
 ### Funkcje
 
@@ -815,7 +815,7 @@ GO
 
 **Opis:** Trigger ten zapewnia integralność danych w tabeli klienci, eliminując możliwość występowania zduplikowanych rekordów klientów.
 
-![Wykorzystanie trg_zapobiegaj_duplikacji_klientow](./trigger%20zapobiegaj_duplikacji_klientow.png)
+![Wykorzystanie trg_zapobiegaj_duplikacji_klientow](./screeny/trigger%20zapobiegaj_duplikacji_klientow.png)
 
 ---
 
