@@ -2,22 +2,35 @@
 
 Adam Orzel - proc wyswietla dostepne rezerwacje w danym zakresie czasowym i o podanej wiekosci  
 
+--- 
+
 Wojciech K:   
-    ~~- dodanie triggera (zapobieganie duplikacji klientów) baza i dokumentacja~~  
-    ~~- dodanie screena to triggera (zapobieganie duplikacji klientów)~~ dokumentacja  
-    - proceudra ktora anuluje rezerwacje  
-    - dodanie trigerów do bazy i dokumentacji  
-    - dodanie screenow  
-    - zaktualizowanie nazewnictwa plików  
-    - zaktualizowanie ścieżek do plików  
-    - uporządkowanie repo  
+- ~~dodanie triggera (zapobieganie duplikacji klientów) baza i dokumentacja~~  
+
+- ~~dodanie screena to triggera (zapobieganie duplikacji klientów)~~ dokumentacja  
+
+- proceudra ktora anuluje rezerwacje  
+
+- ~~dodanie screenow~~  
+
+- ~~zaktualizowanie nazewnictwa plików~~  
+
+- ~~zaktualizowanie ścieżek do plików~~  
+
+- ~~uporządkowanie repo~~  
 
 **Others:** 
-- poprawnić procedure dodawanie rezerwacji
-- dodanie opisu i screena do procedury dodawanie rezerwacji
+- poprawnić procedure dodawanie rezerwacji  
+
+- dodanie opisu i screena do procedury dodawanie rezerwacji  
+
 - dodanie screena do Obliczanie całkowitego kosztu rezerwacji
+
 - sprawdzić czy on działą
+
 - dodać screena dostepne_pokoje.png
+
+---
            
 Bartek L - prcedura dodaj usluge  
 Kacper - procedura rezerwacji, dodanie klienta  
