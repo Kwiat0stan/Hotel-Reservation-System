@@ -1,4 +1,4 @@
-create or alter procedure [dbo].[dodaj_usluge]
+create or alter procedure [dbo].[p_dodaj_usluge]
 @opis nvarchar(5),
 @cena money
 as
