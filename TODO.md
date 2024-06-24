@@ -21,14 +21,14 @@ Wojciech K:
 
 **Others:** 
 - poprawnić procedure dodawanie rezerwacji  
-
 - dodanie opisu i screena do procedury dodawanie rezerwacji  
 
-- dodanie screena do Obliczanie całkowitego kosztu rezerwacji
+- dodanie screena do funkcji Obliczanie całkowitego kosztu rezerwacji - marcin
 
-- sprawdzić czy on działą
+- sprawdzić czy on działą pkt wyzej
 
 - dodać screena dostepne_pokoje.png
+
 
 ---
            
