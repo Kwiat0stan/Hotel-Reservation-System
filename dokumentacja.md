@@ -782,3 +782,37 @@ GO
 ## Triggery
 
 (dla każdego triggera należy wkleić kod polecenia definiującego trigger wraz z komentarzem)
+
+### trg_zapobiegaj_duplikacji_klientow
+
+```sql
+
+CREATE TRIGGER trg_zapobiegaj_duplikacji_klientow
+ON klienci
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @noweImie NVARCHAR(12), @noweNazwisko NVARCHAR(15), @nowyTelefon NVARCHAR(15)
+    SELECT @noweImie = i.imie, @noweNazwisko = i.nazwisko, @nowyTelefon = i.telefon
+    FROM inserted i
+
+    IF EXISTS (SELECT 1 FROM klienci 
+               WHERE imie = @noweImie AND nazwisko = @noweNazwisko AND telefon = @nowyTelefon)
+    BEGIN
+        RAISERROR ('Klient jest juz w bazie.', 16, 1)
+        ROLLBACK TRANSACTION
+    END
+    ELSE
+    BEGIN
+        INSERT INTO klienci (imie, nazwisko, telefon)
+        SELECT imie, nazwisko, telefon
+        FROM inserted
+    END
+END
+GO
+
+```
+
+**Opis:** Trigger ten zapewnia integralność danych w tabeli klienci, eliminując możliwość występowania zduplikowanych rekordów klientów.
+
+![Wykorzystanie trg_zapobiegaj_duplikacji_klientow](./trigger%20zapobiegaj_duplikacji_klientow.png)
