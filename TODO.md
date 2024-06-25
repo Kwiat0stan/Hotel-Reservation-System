@@ -25,7 +25,7 @@ Wojciech K:
 - poprawnić procedure dodawanie rezerwacji  
 - dodanie opisu i screena do procedury dodawanie rezerwacji  
 
-- dodanie screena do funkcji Obliczanie całkowitego kosztu rezerwacji - marcin
+- dodanie screena (komenda w poleceniu ddl) do funkcji Obliczanie całkowitego kosztu rezerwacji - marcin  
 
 - sprawdzić czy on działą pkt wyzej
 
