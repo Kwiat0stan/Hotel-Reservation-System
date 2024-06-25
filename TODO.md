@@ -27,9 +27,9 @@ Wojciech K:
 
 - dodanie screena (komenda w poleceniu ddl) do funkcji Obliczanie całkowitego kosztu rezerwacji - marcin  
 
-- sprawdzić czy on działą pkt wyzej
+- sprawdzić czy działa -  pkt wyzej  
 
-- dodać screena dostepne_pokoje.png
+- dodać screena dostepne_pokoje.png i sprawdzić czy działa ten widok  
 
 
 ---
