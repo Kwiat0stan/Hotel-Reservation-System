@@ -747,7 +747,7 @@ end;
 
 ```
 
-**Opis:** TODO: Dodanie opisu
+**Opis:** TODO: Dodanie opisu - Kacper
 
 TODO: Dodanie screena
 
