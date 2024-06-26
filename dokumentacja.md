@@ -785,7 +785,7 @@ end
 
 ```sql
 
-CREATE FUNCTION [dbo].[calkowity_koszt] (@id_rezerwacji INT)
+CREATE FUNCTION [dbo].[f_calkowity_koszt] (@id_rezerwacji INT)
 RETURNS MONEY 
 AS BEGIN   
 DECLARE @ckoszt MONEY;
