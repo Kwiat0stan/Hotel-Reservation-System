@@ -837,6 +837,7 @@ CREATE PROCEDURE [dbo].[p_anuluj_zamowienie] @id_zamowienia INT
 AS
 BEGIN
   DECLARE @status_anulowane INT;
+  DECLARE @data_zameldowania DATE;
   
   SELECT @status_anulowane = id
   FROM statusy
@@ -844,10 +845,21 @@ BEGIN
   
   IF EXISTS (SELECT * FROM rezerwacje WHERE id = @id_zamowienia)
   BEGIN
-    UPDATE rezerwacje
-    SET id_status = @status_anulowane
+    SELECT @data_zameldowania = data_zameldowania
+    FROM rezerwacje
     WHERE id = @id_zamowienia;
-    PRINT 'Status zamówienia został zmieniony na anulowane.';
+    
+    IF DATEDIFF(DAY, GETDATE(), @data_zameldowania) >= 1
+    BEGIN
+      UPDATE rezerwacje
+      SET id_status = @status_anulowane
+      WHERE id = @id_zamowienia;
+      PRINT 'Status zamówienia został zmieniony na anulowane.';
+    END
+    ELSE
+    BEGIN
+      PRINT 'Zamówienie może być anulowane maksymalnie 1 dzień przed datą zameldowania.';
+    END
   END
   ELSE
   BEGIN
@@ -857,15 +869,21 @@ END;
 
 ```
 
-**Opis:** Procedura p_anuluj_zamowienie jest przeznaczona do anulowania zamówienia w systemie. Jeśli zamówienie o podanym id nie istnieje zwracana jest informacja o jego braku.
+**Opis:** Procedura p_anuluj_zamowienie jest przeznaczona do anulowania zamówienia w systemie. Jeśli zamówienie o podanym id nie istnieje zwracana jest informacja o jego braku. W przypadku gdy próba anulowania rezerwacji jest na jeden dzień przed datą zameldowania, próba zostanie odrzucona.
 
 *Anulowanie zamówienia*  
 
-![Anulacja zamówienia](./screeny/p-anulacja-zamowienia.png)  
+![Anulacja zamówienia](./screeny/p-anulowanie-zam-z-warunkami.png)  
 
-*Próba anulacji zamówienia o błędnym id*  
+*Próba anulowania zamówienia o błędnym id*  
 
 ![Error w trakcie anulowania](./screeny/bledna-anulacja.png)
+
+*Próba anulowania zamówienia z zbyt bliską datą zamelodania*  
+
+![Data](./screeny/data.png)  
+
+![Error o zbyt bliskej dacie zameldowania](./screeny/error-data-zameldowania.png)
 
 
 ## Funkcje
