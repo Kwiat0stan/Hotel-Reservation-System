@@ -832,11 +832,40 @@ end
 ### Anulowanie zamówienia
 
 ```sql
+
+CREATE PROCEDURE [dbo].[p_anuluj_zamowienie] @id_zamowienia INT
+AS
+BEGIN
+  DECLARE @status_anulowane INT;
+  
+  SELECT @status_anulowane = id
+  FROM statusy
+  WHERE nazwa = 'anulowane';
+  
+  IF EXISTS (SELECT * FROM rezerwacje WHERE id = @id_zamowienia)
+  BEGIN
+    UPDATE rezerwacje
+    SET id_status = @status_anulowane
+    WHERE id = @id_zamowienia;
+    PRINT 'Status zamówienia został zmieniony na anulowane.';
+  END
+  ELSE
+  BEGIN
+    PRINT 'Zamówienie z podanym id nie istnieje.';
+  END
+END;
+
 ```
 
-**Opis:**
+**Opis:** Procedura p_anuluj_zamowienie jest przeznaczona do anulowania zamówienia w systemie. Jeśli zamówienie o podanym id nie istnieje zwracana jest informacja o jego braku.
 
-![]()
+*Anulowanie zamówienia*  
+
+![Anulacja zamówienia](./screeny/p-anulacja-zamowienia.png)  
+
+*Próba anulacji zamówienia o błędnym id*  
+
+![Error w trakcie anulowania](./screeny/bledna-anulacja.png)
 
 
 ## Funkcje
