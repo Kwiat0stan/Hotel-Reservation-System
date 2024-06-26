@@ -670,6 +670,55 @@ TODO:
 
 ## Procedury
 
+### Wyświetlanie dostępnych pokoi w kokretnym terminie
+
+```sql
+
+CREATE PROCEDURE p_dostępne_pokoje
+@data_poczatkowa date, @data_koncowa date
+AS
+BEGIN
+
+	if @data_poczatkowa < dateadd(day, 2, getdate())
+		throw 50001, 'Rezerwacja musi byc wykonana conajmniej 48h przez zameldowaniem', 1;
+    if @data_koncowa < @data_poczatkowa
+        throw 50001, 'Błędny przedział', 1;
+
+    SELECT id as numer_pokoju, nazwa, czy_balkon, czy_aneks, czy_klimatyzacja, czy_telewizor, czy_wanna, ile_osob, kwota
+    FROM vw_specyfikacja_pokoju
+    WHERE id IN (
+        SELECT DISTINCT id_pokoju
+        FROM vw_rezerwacja
+        WHERE id_pokoju NOT IN (
+            SELECT id_pokoju
+            FROM vw_rezerwacja
+            WHERE ((data_zameldowania < @data_koncowa AND data_wymeldowania > @data_poczatkowa)
+            OR (data_zameldowania >= @data_poczatkowa AND data_zameldowania < @data_koncowa)
+            OR (data_wymeldowania > @data_poczatkowa AND data_wymeldowania <= @data_koncowa)
+            OR (data_zameldowania <= @data_poczatkowa AND data_wymeldowania >= @data_koncowa))
+            AND status != 'anulowane'
+        )
+    );
+END;
+
+```
+
+**Opis:** Procedura p_dostępne_pokoje służy do wyszukiwania dostępnych pokoi w określonym przedziale czasowym, sprawdzając przy tym czy podana data początkowa jest większa o 2 dni od aktualnej daty ponieważ datę rezerwacji i datę zameldowania musi dzielić 48 godzin.
+
+**Przykład 1**  
+
+![Wykorzystanie procedury p_dostepne_pokoje p1](./screeny/p_dostpene-pokoje-p1.png)  
+
+**Przykład 2**  
+
+![Wykorzystanie procedury p_dostepne_pokoje p2](./screeny/p-dostpene-pokoje-p2.png)  
+
+**Przkład 3**  
+
+![Wykorzystanie procedury p_dostepne_pokoje p2](./screeny/p-dostpene-pokoje-p2.png)
+
+---
+
 ### Dodawanie rezerwacji - do poprawienia
 
 ```sql
@@ -777,6 +826,17 @@ end
 **Opis:** Procedura p_dodaj_usluge służy do dodawania nowej usługi do tabeli typ_uslugi. Przyjmuje dwa parametry: opis usługi oraz jej cenę.
 
 ![Screen dodawania usłgui](./screeny/proc-dodaj-usluge.png)
+
+---
+
+### Anulowanie zamówienia
+
+```sql
+```
+
+**Opis:**
+
+![]()
 
 
 ## Funkcje
