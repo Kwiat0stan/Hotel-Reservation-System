@@ -21,7 +21,9 @@ Wojciech K:
 
 - ~~uporządkowanie repo~~
 
-- ~~dodanie f_ do funkcji całkowity koszt (w bazie i dokumentacji)~~     
+- ~~dodanie f_ do funkcji całkowity koszt (w bazie i dokumentacji)~~  
+
+- przeniesienie insertow z dokumentacji
 
 **Others:** 
 - poprawnić procedure dodawanie rezerwacji - Kacper  
