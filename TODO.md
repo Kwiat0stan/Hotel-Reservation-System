@@ -9,7 +9,9 @@ Wojciech K:
 
 - ~~dodanie screena to triggera (zapobieganie duplikacji klientów)~~ dokumentacja  
 
-- proceudra ktora anuluje rezerwacje  
+- ~~proceudra ktora anuluje rezerwacje~~
+
+- ~~dodanie procedury dostepne pokoje i screenów~~
 
 - ~~dodanie screenow~~  
 
@@ -22,8 +24,8 @@ Wojciech K:
 - ~~dodanie f_ do funkcji całkowity koszt (w bazie i dokumentacji)~~     
 
 **Others:** 
-- poprawnić procedure dodawanie rezerwacji  
-- dodanie opisu i screena do procedury dodawanie rezerwacji  
+- poprawnić procedure dodawanie rezerwacji - Kacper  
+- dodanie opisu i screena do procedury dodawanie rezerwacji - Kacper  
 
 - dodanie screena (komenda w poleceniu ddl) do funkcji Obliczanie całkowitego kosztu rezerwacji - marcin  
 
