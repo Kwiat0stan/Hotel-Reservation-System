@@ -41,6 +41,6 @@ Wojciech K:
 Bartek L - trigger typ uslugi i do logow  
 Kacper - procedura rezerwacji, dodanie klienta  ddl i screen
 
-Marcin - przypadki uzycia   / przedluzenie terminu, procedura kiedy wolny pokoj
+Marcin - przypadki uzycia   / przedluzenie terminu, procedura kiedy wolny pokoj  
 Adam - Modyfikacja rezerwacji 
 
