@@ -711,7 +711,11 @@ GO
 
 **Opis:** Funkcja sumuje koszty usług, pokoi oraz wyżywienia z rezerwacji, używa do tego JOIN aby połączyć tabele rezerwacji, usługi, rezerwacje_pokoi i wyżywienia. Sumuje koluny z kosztami, jeżeli któraś z kolumn nie zawiera danych wstawia 0.
 
+*Przykład 1*
+
 ![Przykład uzycia calkowitego kosztu](./screeny/f_calkowity_koszt.png)
+
+*Przykład 2*
 
 ![Przykład uzycia calkowitego kosztu 2](./screeny/f_calkowity_koszt1.png)
 
