@@ -1,8 +1,5 @@
 # To do
 
-Adam Orzel - proc wyswietla dostepne rezerwacje w danym zakresie czasowym i o podanej wiekosci  
-
---- 
 
 Wojciech K:   
 - ~~dodanie triggera (zapobieganie duplikacji klientów) baza i dokumentacja~~  
@@ -31,18 +28,17 @@ Wojciech K:
 - poprawnić procedure dodawanie rezerwacji - Kacper  
 - dodanie opisu i screena do procedury dodawanie rezerwacji - Kacper  
 
-- dodanie screena (komenda w poleceniu ddl) do funkcji Obliczanie całkowitego kosztu rezerwacji - marcin  
+- ~~dodanie screena (komenda w poleceniu ddl) do funkcji Obliczanie całkowitego kosztu rezerwacji - marcin~~  
 
-- sprawdzić czy działa -  pkt wyzej  
-
-- dodać screena dostepne_pokoje.png i sprawdzić czy działa ten widok  
+- ~~sprawdzić czy działa -  pkt wyzej~~  
+ 
 
 
 ---
            
-Bartek L - prcedura dodaj usluge  
-Kacper - procedura rezerwacji, dodanie klienta  
+Bartek L - trigger typ uslugi i do logow  
+Kacper - procedura rezerwacji, dodanie klienta  ddl i screen
 
-Marcin - funkcja calkowity_ksozt     
-Trzeba dodać więcej zamówień do tabeli rezerwacje .   
+Marcin - przypadki uzycia   
+Adam - Modyfikacja rezerwacji / przedluzenie terminu
 
