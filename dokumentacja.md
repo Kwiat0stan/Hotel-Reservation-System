@@ -657,6 +657,30 @@ END;
 
 ![Error o zbyt bliskej dacie zameldowania](./screeny/error-data-zameldowania.png)
 
+---
+
+### Sprawdzenie kiedy dany pokoj bedzie wolny
+
+```sql
+
+CREATE PROCEDURE p_zwolniony_pokoj 
+    @room_id INT
+AS
+BEGIN
+    SELECT r.id AS rezerwacja_id, r.data_wymeldowania, r.id_klienta
+    FROM rezerwacje_pokoi rp
+    JOIN rezerwacje r ON rp.id_rezerwacji = r.id
+    WHERE rp.id_pokoju = @room_id
+    ORDER BY r.data_wymeldowania DESC;
+END;
+
+```
+
+**Opis:** Procedura sprawdza kiedy dany pokój zostanie zwolniony.
+
+![Zwolniony pokoj](./screeny/zwolnieniepokoju.png)
+
+
 
 ## Funkcje
 
@@ -935,5 +959,6 @@ exec p_anuluj_zamowienie 29
 select dbo.f_calkowity_koszt(20) as calkowity_koszt   /*( ) - id_rezerwacji*/
 
 -- Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
-(Marcin) - dodanie procedury
+EXEC dbo.p_zwolniony_pokoj @room_id = 2 ;
+
 ```
