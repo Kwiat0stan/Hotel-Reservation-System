@@ -802,3 +802,42 @@ END;
 **Opis:** Trigger zapobiega wstawianiu zduplikowanych rekordów do tabeli rezerwacje. W momencie próby dodania nowej rezerwacji, trigger ten sprawdza, czy rezerwacja o tych samych danych już istnieje w bazie danych. Jeśli taka rezerwacja już istnieje, operacja jest przerywana, a użytkownik otrzymuje komunikat o błędzie.
 
 ![Próba zduplikowania rezerwacji](./screeny/error-duplikacja-rezerwacji.png)
+
+---
+
+### trg_zapobiegaj_duplikacji_typ_uslugi
+
+```sql
+
+CREATE   TRIGGER [dbo].[trg_zapobiegaj_duplikacji_typ_uslugi]
+ON [dbo].[typ_uslugi]
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @nowy_opis NVARCHAR(5),
+            @nowa_cena MONEY;
+    SELECT @nowy_opis = i.opis,
+           @nowa_cena = i.cena
+    FROM inserted i;
+    IF EXISTS (SELECT 1 
+               FROM typ_uslugi
+               WHERE opis = @nowy_opis 
+                 AND cena = @nowa_cena)
+    BEGIN
+        RAISERROR('Typ usługi już jest w bazie', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO typ_uslugi (opis, cena)
+        SELECT opis, cena
+        FROM inserted;
+    END
+END;
+
+```
+
+
+**Opis:** Trigger zapobiega wstawianiu zduplikowanych rekordów do tabeli typ_uslugi. W momencie próby dodania nowego typu usługi, trigger ten sprawdza, czy usługa o tym samym opisie i cenie już istnieje w bazie danych. Jeśli taka usługa już istnieje, operacja jest przerywana, a użytkownik otrzymuje komunikat o błędzie.
+
+![Próba zduplikowania usługi](./screeny/error-duplikacja-uslugi.png)
