@@ -931,6 +931,8 @@ exec p_anuluj_zamowienie 20
 -- 3. Anulowanie rezerwacji
 exec p_anuluj_zamowienie 29
 
--- Klient chce wiedzieć ile wyniesie całkowity koszt pobytu
+-- Klient chce wiedzieć ile wyniesie całkowity koszt pobytu 
+select dbo.f_calkowity_koszt(20) as calkowity_koszt   /*( ) - id_rezerwacji*/
+
 
 ```
