@@ -753,3 +753,52 @@ GO
 
 ---
 
+### trg_zapobiegaj_duplikacji_rezerwacje
+
+```sql
+
+CREATE   TRIGGER [dbo].[trg_zapobiegaj_duplikacji_rezerwacje]
+ON [dbo].[rezerwacje]
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @nowy_id_klienta INT, 
+            @nowa_data_zameldowania DATE, 
+            @nowa_data_wymeldowania DATE, 
+            @nowa_data_rezerwacji DATE, 
+            @nowy_id_status INT, 
+            @nowy_rabat NUMERIC(18, 0);
+
+    SELECT @nowy_id_klienta = i.id_klienta, 
+           @nowa_data_zameldowania = i.data_zameldowania, 
+           @nowa_data_wymeldowania = i.data_wymeldowania, 
+           @nowa_data_rezerwacji = i.data_rezerwacji, 
+           @nowy_id_status = i.id_status, 
+           @nowy_rabat = i.rabat
+    FROM inserted i;
+
+    IF EXISTS (SELECT 1 
+               FROM rezerwacje
+               WHERE id_klienta = @nowy_id_klienta 
+                 AND data_zameldowania = @nowa_data_zameldowania 
+                 AND data_wymeldowania = @nowa_data_wymeldowania 
+                 AND data_rezerwacji = @nowa_data_rezerwacji 
+                 AND id_status = @nowy_id_status 
+                 AND rabat = @nowy_rabat)
+    BEGIN
+        RAISERROR('Rezerwacja już jest w bazie', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO rezerwacje (id_klienta, data_zameldowania, data_wymeldowania, data_rezerwacji, id_status, rabat)
+        SELECT id_klienta, data_zameldowania, data_wymeldowania, data_rezerwacji, id_status, rabat
+        FROM inserted;
+    END
+END;
+
+```
+
+**Opis:** Trigger zapobiega wstawianiu zduplikowanych rekordów do tabeli rezerwacje. W momencie próby dodania nowej rezerwacji, trigger ten sprawdza, czy rezerwacja o tych samych danych już istnieje w bazie danych. Jeśli taka rezerwacja już istnieje, operacja jest przerywana, a użytkownik otrzymuje komunikat o błędzie.
+
+![Próba zduplikowania rezerwacji](./screeny/error-duplikacja-rezerwacji.png)
