@@ -23,7 +23,9 @@ Wojciech K:
 
 - ~~dodanie f_ do funkcji całkowity koszt (w bazie i dokumentacji)~~  
 
-- przeniesienie insertow z dokumentacji
+- ~~przeniesienie insertow z dokumentacji~~ 
+
+- dodanie triggera do tabeli typ_pokoju
 
 **Others:** 
 - poprawnić procedure dodawanie rezerwacji - Kacper  

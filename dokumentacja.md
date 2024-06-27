@@ -882,3 +882,12 @@ END;
 
 ![Próba duplikacji rezerwacji pokoji](./screeny/error-duplikacja-rezerwacji-pokoi.png)
 
+---
+
+### trigger do typ_pokoju - dodac
+
+```sql
+
+
+
+```
