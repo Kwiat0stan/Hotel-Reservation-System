@@ -520,24 +520,24 @@ END;
 
 ---
 
-### Dodawanie rezerwacji - do poprawienia
+### Dodawanie rezerwacji
 
 ```sql
 
---CREATE TYPE dbo.idWyzywienia AS TABLE
---(
---    ID INT
---);
+CREATE TYPE dbo.idWyzywienia AS TABLE
+(
+    ID INT
+);
 
---CREATE TYPE dbo.idUslugi AS TABLE
---(
---    ID INT
---);
+CREATE TYPE dbo.idUslugi AS TABLE
+(
+    ID INT
+);
 
---CREATE TYPE dbo.idPokoju AS TABLE
---(
---    ID INT
---);
+CREATE TYPE dbo.idPokoju AS TABLE
+(
+    ID INT
+);
 
 GO
 CREATE or ALTER PROCEDURE p_dodanie_rezerwacji
@@ -547,7 +547,7 @@ begin
 	if @data_zameldowania >= @data_wymeldowania
 		throw 50001, 'Data zameldowania musi być wcześniejsza niż wymeldowania', 1;
 
-	if @data_poczatkowa < dateadd(day, 2, getdate())
+	if @data_zameldowania < dateadd(day, 2, getdate())
 		throw 50001, 'Rezerwacja musi byc wykonana conajmniej 48h przez zameldowaniem', 1;
 
 	if ABS(DATEDIFF(day, @data_zameldowania, @data_wymeldowania))>14
