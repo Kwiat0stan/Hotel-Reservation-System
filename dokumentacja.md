@@ -657,6 +657,22 @@ END;
 
 ![Error o zbyt bliskej dacie zameldowania](./screeny/error-data-zameldowania.png)
 
+### Zwolnienie pokoju 
+```
+CREATE PROCEDURE Zwolniony_pokoj 
+    @room_id INT
+AS
+BEGIN
+    SELECT r.id AS rezerwacja_id, r.data_wymeldowania, r.id_klienta
+    FROM rezerwacje_pokoi rp
+    JOIN rezerwacje r ON rp.id_rezerwacji = r.id
+    WHERE rp.id_pokoju = @room_id
+    ORDER BY r.data_wymeldowania DESC;
+END;
+```
+**Opis:** Procedura Zwolniony_pokoj służy do uzyskania informacji dacie wymeldowania po id pokoju.
+
+![Zwolnieniepokoju](./screeny/zwolnieniepokoju.png)
 
 ## Funkcje
 
