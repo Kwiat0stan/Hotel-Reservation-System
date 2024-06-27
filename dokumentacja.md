@@ -841,3 +841,44 @@ END;
 **Opis:** Trigger zapobiega wstawianiu zduplikowanych rekordów do tabeli typ_uslugi. W momencie próby dodania nowego typu usługi, trigger ten sprawdza, czy usługa o tym samym opisie i cenie już istnieje w bazie danych. Jeśli taka usługa już istnieje, operacja jest przerywana, a użytkownik otrzymuje komunikat o błędzie.
 
 ![Próba zduplikowania usługi](./screeny/error-duplikacja-uslugi.png)
+
+---
+
+### trg_zapobiegaj_duplikacji_rezerwacje_pokoi
+
+```sql
+
+CREATE   TRIGGER [dbo].[trg_zapobiegaj_duplikacji_rezerwacje_pokoi]
+ON [dbo].[rezerwacje_pokoi]
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @nowy_id_rezerwacji INT,
+            @nowy_id_pokoju INT;
+
+    SELECT @nowy_id_rezerwacji = i.id_rezerwacji,
+           @nowy_id_pokoju = i.id_pokoju
+    FROM inserted i;
+
+    IF EXISTS (SELECT 1 
+               FROM rezerwacje_pokoi
+               WHERE id_rezerwacji = @nowy_id_rezerwacji 
+                 AND id_pokoju = @nowy_id_pokoju)
+    BEGIN
+        RAISERROR('Rezerwacja pokoji jest ju w bazie', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO rezerwacje_pokoi (id_rezerwacji, id_pokoju, cena_pokojow)
+        SELECT id_rezerwacji, id_pokoju, cena_pokojow
+        FROM inserted;
+    END
+END;
+
+```
+
+**Opis:** Trigger zapobiega wstawianiu zduplikowanych rekordów do tabeli rezerwacje_pokoi. W momencie próby dodania nowej rezerwacji pokoju, trigger ten sprawdza, czy już istnieje rekord powiązany z daną rezerwacją i pokojem. Jeśli taki rekord już istnieje, operacja jest przerywana, a użytkownik otrzymuje komunikat o błędzie.
+
+![Próba duplikacji rezerwacji pokoji](./screeny/error-duplikacja-rezerwacji-pokoi.png)
+
