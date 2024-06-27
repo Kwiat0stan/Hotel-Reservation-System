@@ -499,9 +499,9 @@ END;
 
 ![Wykorzystanie procedury p_dostepne_pokoje p2](./screeny/p-dostpene-pokoje-p2.png)  
 
-**Przkład 3**  
+**Przykład 3**  
 
-![Wykorzystanie procedury p_dostepne_pokoje p2](./screeny/p-dostpene-pokoje-p2.png)
+![Wykorzystanie procedury p_dostepne_pokoje p2](./screeny/p-dostpene-pokoje-p3.png)
 
 ---
 
