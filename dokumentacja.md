@@ -92,8 +92,17 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 5) Klient chce przedłużyć pobyt.
 6) Właściciel chce raport z danego okresu.
 7) Klient chce dostać kwote wynajmu.
+GO 
+select dbo.f_calkowity_koszt(20) as calkowity_koszt /*( ) - id_rezerwacji*/
+GO
+ 
 8) Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
-
+ SELECT r.id AS rezerwacja_id, r.data_wymeldowania, r.id_klienta
+FROM rezerwacje_pokoi rp
+JOIN rezerwacje r ON rp.id_rezerwacji = r.id
+WHERE rp.id_pokoju = 2 /*ID pokoju*/
+10) Klient chce anulować zamówienie
+    exec p_anuluj_zamowienie 3
 
 
 # 3.	Projekt bazy danych
