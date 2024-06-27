@@ -42,5 +42,5 @@ Bartek L - trigger typ uslugi i do logow
 Kacper - procedura rezerwacji, dodanie klienta  ddl i screen
 
 Marcin - przypadki uzycia   
-Adam - Modyfikacja rezerwacji / przedluzenie terminu
+Adam - Modyfikacja rezerwacji / przedluzenie terminu, procedura kiedy wolny pokoj
 
