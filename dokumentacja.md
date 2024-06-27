@@ -90,9 +90,8 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 3) Klient chce zapoznać z dodatkowymi usługami hotelu.
 4) Klient chce zarezerwować pokój.
 5) Klient chce przedłużyć pobyt.
-6) Właściciel chce raport z danego okresu.
-7) Klient chce dostać kwote wynajmu.
-8) Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
+6) Klient chce dostać kwote wynajmu.
+7) Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
 
 
 
