@@ -78,10 +78,10 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 ### Lista wymagań: 
 - wyświetlanie specyfikacji pokoju
 - wyświetlanie informacji o rezerwacji 
-- wyświetlanie informacji o dostepnych pokojach w danych terminach o konkretnych parametrach
+- wyświetlanie informacji o dostepnych pokojach w danych terminach
 - dodawanie rezerwacji 
 - modyfikacja rezerwacji
-- usuwanie rezerwacji
+- anulowanie rezerwacji
 - obliczanie całkowitego kosztu pobytu
 
 ### Przypadki użycia:
@@ -90,11 +90,9 @@ Rabat za czas można łączyć z pozostałymi rabatami.
 3) Klient chce zapoznać z dodatkowymi usługami hotelu.
 4) Klient chce zarezerwować pokój.
 5) Klient chce przedłużyć pobyt.
-6) Pracownik chce sprawdzić ilość obecnie zajętych pokoi.
-7) Właściciel chce raport z danego okresu.
-8) Klient chce dostać kwote wynajmu.
-9) Właściciel chce wiedzieć ile klientów skorzystało z jakichkolwiek rabatów w danym okresie.
-10) Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
+6) Właściciel chce raport z danego okresu.
+7) Klient chce dostać kwote wynajmu.
+8) Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
 
 
 
@@ -448,6 +446,24 @@ GROUP BY r.id, r.id_klienta, r.data_zameldowania, r.data_wymeldowania, r.data_re
 ```
 
 ![specyfikacja](./screeny/rezerwacja.png)
+
+---
+
+3. Zestawienie wybranych opcji dodatkowych
+
+```sql
+
+create view [dbo].[vw_zestawienie_dodatkowych_opcji] as
+select u.opis as 'dodatkowe opcje', u.cena 
+from typ_uslugi u 
+union 
+    select 'wyzywienie: ' + w.opis, w.cena 
+    from typ_wyzywienia w
+GO
+
+```
+
+![Dodatkowe opcje](./screeny/dodatkowe-opcje.png)
 
 
 ## Procedury/funkcje
@@ -868,3 +884,7 @@ END;
 
 
 ```
+
+## Przykłady użycia
+
+*Klient chce zapoznać się z ofertą dostępnym pokoi w konkretnym terminie.*
