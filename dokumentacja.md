@@ -935,5 +935,5 @@ exec p_anuluj_zamowienie 29
 select dbo.f_calkowity_koszt(20) as calkowity_koszt   /*( ) - id_rezerwacji*/
 
 -- Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
-(Marcin)
+(Marcin) - dodanie procedury
 ```
