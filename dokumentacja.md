@@ -713,6 +713,8 @@ GO
 
 ![Przykład uzycia calkowitego kosztu](./screeny/f_calkowity_koszt.png)
 
+![Przykład uzycia calkowitego kosztu 2](./screeny/f_calkowity_koszt1.png)
+
 ## Triggery
 
 (dla każdego triggera należy wkleić kod polecenia definiującego trigger wraz z komentarzem)
