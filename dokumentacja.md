@@ -887,4 +887,35 @@ END;
 
 ## Przykłady użycia
 
-*Klient chce zapoznać się z ofertą dostępnym pokoi w konkretnym terminie.*
+```sql
+
+-- Klient chce zapoznać się z ofertą dostępnym pokoi w konkretnym terminie.
+
+-- 1. po terminie
+exec p_dostępne_pokoje '2023-11-11', '2023-11-15';
+
+-- 2. bledny przedzial
+exec p_dostępne_pokoje '2024-06-30', '2024-06-10';
+
+-- 3. poprawnie
+exec p_dostępne_pokoje '2024-07-29', '2024-07-29'
+
+-- Klient chce zapoznać się z wyposażeniem wybranego pokoju.
+
+-- 1. wszystkie pokoje
+select * from vw_specyfikacja_pokoju
+
+-- 2. konkretna kategoria pokoju
+select * from vw_specyfikacja_pokoju where nazwa = 'Economic'
+
+-- 3. konkretyn numer pokoju
+select * from vw_specyfikacja_pokoju where id = 15
+
+-- Klient chce zapoznać z dodatkowymi usługami hotelu jakie mozna wybra.
+
+select * from vw_zestawienie_dodatkowych_opcji
+
+-- Klient chce zarezerwować pokój.
+(Kacper konczy p_rezerwacja)
+
+```
