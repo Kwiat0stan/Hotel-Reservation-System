@@ -565,35 +565,6 @@ end;
 
 ---
 
-### Dostępne pokoje o podanej ilości osób w danym zakresie cenowym
-
-```sql
-
-create procedure p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 
-@ilosc_osob char(20), @min_kwota money, @max_kwota money
-as
-begin
-    if @min_kwota > @max_kwota
-        throw 50001, 'Błędny przedział', 1;
-    if not exists (select * from typ_pokoju where ile_osob = @ilosc_osob)
-        throw 50001, 'Nie ma pokoju o takiej ilości miejsc', 1;
-	
-    select *
-	from vw_dostepne_pokoje
-	where ile_osob = @ilosc_osob
-        and kwota between @min_kwota and @max_kwota
-end;
-
-```
-
-**Opis:** Procedura ta na podstawie widoku vw_dostepne_pokoje wyswietla dostepne pokoje o podanej ilosci osob w danym zakresie cenowym. Uwaga: Rozwiązać problem duplikujących się pokoi.
-
-**Komenda:** exec p_dostepne_pokoje_o_podanej_ilosci_w_danym_zakresie_cenowym 'jednoosobowe', 150, 200
-
-![proc dostepne pokoje o podanej ilosci i cenie](./screeny/procedura-dostepne-pokoje-podanej-osobo-i-cenie.png)
-
----
-
 ### Dodawanie usługi
 
 ```sql
