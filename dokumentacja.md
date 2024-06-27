@@ -911,11 +911,27 @@ select * from vw_specyfikacja_pokoju where nazwa = 'Economic'
 -- 3. konkretyn numer pokoju
 select * from vw_specyfikacja_pokoju where id = 15
 
--- Klient chce zapoznać z dodatkowymi usługami hotelu jakie mozna wybra.
+-- Klient chce zapoznać z dodatkowymi usługami hotelu jakie moze wybrac.
 
 select * from vw_zestawienie_dodatkowych_opcji
 
 -- Klient chce zarezerwować pokój.
 (Kacper konczy p_rezerwacja)
+
+-- Modyfikacja rezerwacji / przedluzenie pobytu
+(Adam)
+
+-- Klient chce anulować rezerwacje
+
+-- 1. Próba anulowania zamówienia o błędnym id
+exec p_anuluj_zamowienie 22
+
+-- 2. Próba anulowania zamówienia z zbyt bliską datą zamelodania
+exec p_anuluj_zamowienie 20
+
+-- 3. Anulowanie rezerwacji
+exec p_anuluj_zamowienie 29
+
+-- Klient chce wiedzieć ile wyniesie całkowity koszt pobytu
 
 ```
