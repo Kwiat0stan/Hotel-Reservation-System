@@ -524,26 +524,93 @@ END;
 
 ```sql
 
-CREATE PROCEDURE p_dodanie_rezerwacji
-@imie nvarchar(12), @nazwisko nvarchar(15), @telefon nvarchar(15), @data_zameldowania date, @data_wymeldowania date, @id_status int, @rabat int
+--CREATE TYPE dbo.idWyzywienia AS TABLE
+--(
+--    ID INT
+--);
+
+--CREATE TYPE dbo.idUslugi AS TABLE
+--(
+--    ID INT
+--);
+
+--CREATE TYPE dbo.idPokoju AS TABLE
+--(
+--    ID INT
+--);
+
+GO
+CREATE or ALTER PROCEDURE p_dodanie_rezerwacji
+@id_klienta int, @data_zameldowania date, @data_wymeldowania date, @id_status int, @rabat int, @idWyzywienia dbo.idWyzywienia READONLY, @idUslugi dbo.idUslugi READONLY, @idPokoju dbo.idPokoju READONLY
 as
 begin
 	if @data_zameldowania >= @data_wymeldowania
-	throw 50001, 'Data zameldowania musi być wcześniejsza niż wymeldowania', 1;
-	if ABS(DATEDIFF(day,GETDATE(),@data_zameldowania))<2
-	throw 50001, 'Rezerwacja musi zostac dokonana minimum na 48h przed zameldowaniem', 1;
+		throw 50001, 'Data zameldowania musi być wcześniejsza niż wymeldowania', 1;
+
+	if @data_poczatkowa < dateadd(day, 2, getdate())
+		throw 50001, 'Rezerwacja musi byc wykonana conajmniej 48h przez zameldowaniem', 1;
+
 	if ABS(DATEDIFF(day, @data_zameldowania, @data_wymeldowania))>14
-	throw 50001, 'Okres rezerwacji nie może być dłuższy niż 14 dni', 1;
-	if(ABS(DATEDIFF(day, @data_zameldowania, @data_wymeldowania))>7
-	@rabat = @rabat + 10;
+		throw 50001, 'Okres rezerwacji nie może być dłuższy niż 14 dni', 1;
 
-	INSERT INTO klienci
-	VALUES(@imie, @nazwisko, @telefon);
+	if NOT EXISTS
+	(SELECT ID
+	FROM @idPokoju
+	WHERE EXISTS
+		(
+		SELECT id
+		FROM vw_specyfikacja_pokoju
+		WHERE id IN (
+			SELECT DISTINCT id
+			FROM vw_rezerwacja
+			WHERE id NOT IN (
+				SELECT id
+				FROM vw_rezerwacja
+				WHERE ((data_zameldowania < @data_wymeldowania AND data_wymeldowania > @data_zameldowania)
+				OR (data_zameldowania >= @data_zameldowania AND data_zameldowania < @data_wymeldowania)
+				OR (data_wymeldowania > @data_zameldowania AND data_wymeldowania <= @data_wymeldowania)
+				OR (data_zameldowania <= @data_zameldowania AND data_wymeldowania >= @data_wymeldowania))
+				AND status != 'anulowane'
+			)
+		)
+		)
+	)
+	throw 50001, 'Co najmniej jeden z pokoi jest już zarezerwowanych w tym okresie', 1;
 
-	SET @id_klienta = SCOPE_IDENTITY();
+	if ABS(DATEDIFF(day, @data_zameldowania, @data_wymeldowania))>7
+	SET @rabat = @rabat + 10
 
 	INSERT INTO rezerwacje
-	VALUES(@id_klienta, @data_zameldowania, data_zameldowania, GETDATE(), @id_status, @rabat);
+	VALUES(@id_klienta, @data_zameldowania, @data_wymeldowania, GETDATE(), @id_status, @rabat);
+
+	declare @id_rezerwacji int
+	SET @id_rezerwacji = @@IDENTITY;
+
+	IF EXISTS (SELECT ID FROM @idWyzywienia)
+	BEGIN
+		INSERT INTO wyzywienie (id_rezerwacji, id_typ_wyzywienia, cena_wyzywienia)
+		SELECT @id_rezerwacji, w.ID, tw.cena
+		FROM @idWyzywienia w
+		JOIN typ_wyzywienia tw ON w.ID = tw.ID;
+	END;
+
+	IF EXISTS (SELECT ID FROM @idUslugi)
+	BEGIN
+		INSERT INTO uslugi (id_typ_uslugi, id_rezerwacji, cena_uslug)
+		SELECT u.ID, @id_rezerwacji, tu.cena
+		FROM @idUslugi u
+		JOIN typ_uslugi tu ON u.ID = tu.ID;
+	END;
+
+	IF EXISTS (SELECT ID FROM @idPokoju)
+	BEGIN
+		INSERT INTO rezerwacje_pokoi (id_rezerwacji, id_pokoju, cena_pokojow)
+		SELECT @id_rezerwacji, p.ID, SUM(tp.cena + kp.cena) AS cena_pokojow
+		FROM @idPokoju p
+		JOIN typ_pokoju tp ON p.ID = tp.ID
+		JOIN kategorie_pokoju kp ON tp.id = kp.ID
+		GROUP BY p.ID;
+	END;
 end;
 
 ```
@@ -551,6 +618,22 @@ end;
 **Opis:** TODO: Dodanie opisu - Kacper
 
 TODO: Dodanie screena
+
+Przykład
+
+```sql
+DECLARE @idPokoju dbo.idPokoju;
+INSERT INTO @idPokoju VALUES (1), (2);
+
+DECLARE @idUslugi dbo.idUslugi;
+INSERT INTO @idUslugi VALUES (1), (2);
+
+DECLARE @idWyzywienia dbo.idWyzywienia;
+INSERT INTO @idWyzywienia VALUES (1), (2);
+
+exec p_dodanie_rezerwacji 5, '2023-05-05', '2023-05-12', 3, 5, @idWyzywienia, @idUslugi, @idPokoju
+```
+
 
 ---
 
