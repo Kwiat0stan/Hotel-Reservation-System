@@ -27,8 +27,8 @@ Wojciech K:
 - dodanie procedury czy kiedy pokoj bedzie wolny kod, scree, uzycie
 
 **Others:** 
-- poprawnić procedure dodawanie rezerwacji - Kacper  
-- dodanie opisu i screena do procedury dodawanie rezerwacji - Kacper  
+- ~~poprawnić procedure dodawanie rezerwacji - Kacper~~  
+- ~~dodanie opisu i screena do procedury dodawanie rezerwacji - Kacper~~ 
 
 - ~~dodanie screena (komenda w poleceniu ddl) do funkcji Obliczanie całkowitego kosztu rezerwacji - marcin~~  
 
@@ -38,9 +38,9 @@ Wojciech K:
 
 ---
            
-Bartek L - trigger typ uslugi i do logow  
-Kacper - procedura rezerwacji, dodanie klienta  ddl i screen
+- Bartek L - trigger typ uslugi i do logow  
+- ~~Kacper - procedura rezerwacji, dodanie klienta  ddl i screen~~
 
-Marcin - przypadki uzycia   / przedluzenie terminu, procedura kiedy wolny pokoj  
-Adam - Modyfikacja rezerwacji 
+- Marcin - przypadki uzycia   / przedluzenie terminu, procedura kiedy wolny pokoj  
+- Adam - Modyfikacja rezerwacji 
 
