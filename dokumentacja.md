@@ -1009,6 +1009,42 @@ END;
 
 ```
 
+---
+
+### Trigger dla całej bazy
+
+```sql
+
+CREATE TRIGGER [trg_logi_bazy]
+ON DATABASE
+FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE, 
+    CREATE_PROCEDURE, ALTER_PROCEDURE, DROP_PROCEDURE, 
+    CREATE_FUNCTION, ALTER_FUNCTION, DROP_FUNCTION
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @log_data XML;
+    DECLARE @typ NVARCHAR(50);
+    DECLARE @tabela NVARCHAR(20);
+    DECLARE @opis NVARCHAR(MAX);
+
+    SET @log_data = EVENTDATA();
+    SET @typ = @log_data.value('(/EVENT_INSTANCE/EventType)[1]', 'NVARCHAR(50)');
+    SET @tabela = @log_data.value('(/EVENT_INSTANCE/ObjectName)[1]', 'NVARCHAR(20)');
+    SET @opis = @log_data.value('(/EVENT_INSTANCE/TSQLCommand)[1]', 'NVARCHAR(MAX)');
+    
+    INSERT INTO system_log (typ, tabela, opis)
+    VALUES (@typ, @tabela, @opis);
+END;
+GO
+
+```
+
+**Opis:** Trigger wpisuje logi bazy danych do tabeli system_log, którą trzeba było dodać na potrzeby tego triggera
+
+![logi bazy](./screeny/logi.png)
+
 ## Przykłady użycia
 
 ```sql
