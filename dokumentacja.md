@@ -1138,12 +1138,6 @@ select * from vw_specyfikacja_pokoju where id = 15
 
 select * from vw_zestawienie_dodatkowych_opcji
 
--- Klient chce zarezerwować pokój.
-(Kacper konczy p_rezerwacja)
-
--- Modyfikacja rezerwacji / przedluzenie pobytu
-(Adam)
-
 -- Klient chce anulować rezerwacje
 
 -- 1. Próba anulowania zamówienia o błędnym id
