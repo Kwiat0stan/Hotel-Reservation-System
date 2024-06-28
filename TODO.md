@@ -43,4 +43,4 @@ Wojciech K:
 
 - ~~Marcin - przypadki uzycia  procedura kiedy wolny pokoj~~  
 - Adam - Modyfikacja rezerwacji 
-
+- Kapcer - proc dodawanie rezerwacji nie dzial dla jednego pokoju
