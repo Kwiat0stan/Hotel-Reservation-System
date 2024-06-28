@@ -747,17 +747,76 @@ END;
 
 ![Zwolniony pokoj](./screeny/zwolnieniepokoju.png)
 
-### Modyfikacja rezeracji - adam
+### Przedluzenie rezerwacji
 
 ```sql
 
+CREATE OR ALTER PROCEDURE p_przedluzenie_rezerwacji
+@id_rezerwacji INTEGER, @nowa_data_koncowa DATE
+AS
+BEGIN
+    DECLARE @data_poczatkowa DATE = (SELECT DISTINCT data_zameldowania FROM vw_rezerwacja WHERE id_rezerwacji = @id_rezerwacji);
+    DECLARE @data_koncowa DATE = (SELECT DISTINCT data_wymeldowania FROM vw_rezerwacja WHERE id_rezerwacji = @id_rezerwacji);
+    
+    IF @nowa_data_koncowa <= @data_koncowa
+        THROW 50001, 'Nowa data wymeldowania nie może być wcześniejsza lub równa aktualnej', 1;
+    
+    IF (SELECT id_status FROM rezerwacje WHERE id = @id_rezerwacji) = 1
+        THROW 50001, 'Nie można przedłużyć anulowanej rezerwacji', 1;
+    
+    IF GETDATE() > @data_koncowa
+        THROW 50001, 'Nie można przedłużyć rezerwacji, która uległa już wygaśnięciu', 1;
+    
+    IF ABS(DATEDIFF(day, @data_poczatkowa, @nowa_data_koncowa)) > 14
+        THROW 50001, 'Okres rezerwacji nie może być dłuższy niż 14 dni', 1;
+
+    IF EXISTS (
+        SELECT id_pokoju
+        FROM vw_rezerwacja
+        WHERE id_pokoju IN (
+            SELECT id_pokoju
+            FROM vw_rezerwacja
+            WHERE id_rezerwacji = @id_rezerwacji
+        )
+        AND ((data_zameldowania < @nowa_data_koncowa AND data_wymeldowania > @data_poczatkowa)
+            OR (data_zameldowania >= @data_poczatkowa AND data_zameldowania < @nowa_data_koncowa)
+            OR (data_wymeldowania > @data_poczatkowa AND data_wymeldowania <= @nowa_data_koncowa)
+            OR (data_zameldowania <= @data_poczatkowa AND data_wymeldowania >= @nowa_data_koncowa))
+        AND status != 'anulowane'
+        AND id_rezerwacji != @id_rezerwacji
+    )
+        THROW 50001, 'Rezerwacja danego pokoju nie może zostać przedłużona. Ktoś inny zdążył już zarezerwować ten pokój w wybranym terminie', 1;
+    ELSE
+        UPDATE rezerwacje 
+        SET data_wymeldowania = @nowa_data_koncowa 
+        WHERE id = @id_rezerwacji;
+END;
+GO
+
 ```
 
-**Opis:**
+**Opis:** Procedura p_przedluzenie_rezerwacji jest zaprojektowana w celu przedłużenia istniejącej rezerwacji w bazie danych. Procedura sprawdza różne warunki przed aktualizacją daty wymeldowania, aby zapewnić integralność danych i zapobiec konfliktom rezerwacji.
 
-![]()
+Przykład 1
+
+![](./screeny/p1-1.png)
+![](./screeny/p1-2.png)
+![](./screeny/p1-3.png)
 
 
+Przykład 2
+
+![](./screeny/p2.png)
+
+Przykład 3
+
+![](./screeny/p3-1.png)
+![](./screeny/p3-2.png)
+
+Przykład 4
+
+![](./screeny/p4-1.png)
+![](./screeny/p4-2.png)
 
 ## Funkcje
 
