@@ -371,6 +371,24 @@ CREATE TABLE typ_pokoju (
 )
 ```
 
+#### Tabela system_log
+
+```sql
+CREATE TABLE [dbo].[system_log](
+	[log_id] [int] IDENTITY(1,1) NOT NULL,
+	[log_data] [datetime] NOT NULL,
+	[typ] [nvarchar](50) NOT NULL,
+	[tabela] [nvarchar](20) NOT NULL,
+	[opis] [nvarchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[log_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+```
+
 ## Związki
 ```sql
 ALTER TABLE rezerwacje ADD FOREIGN KEY (id_klienta) REFERENCES klienci (id)
