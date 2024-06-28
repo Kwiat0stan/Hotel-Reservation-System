@@ -997,13 +997,41 @@ END;
 
 ---
 
-### trigger do typ_pokoju - dodac
+### trigger do typ_pokoju 
 
 ```sql
 
-
+CREATE   TRIGGER [dbo].[trg_zapobiegaj_duplikacji_typ_pokoju]
+ON [dbo].[typ_pokoju]
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @nowy_opis NVARCHAR(20),
+            @nowa_cena MONEY;
+    SELECT @nowy_opis = i.ile_osob,
+           @nowa_cena = i.cena
+    FROM inserted i;
+    IF EXISTS (SELECT 1 
+               FROM typ_pokoju
+               WHERE ile_osob = @nowy_opis 
+                 AND cena = @nowa_cena)
+    BEGIN
+        RAISERROR('Typ pokoju już jest w bazie', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO typ_pokoju(ile_osob, cena)
+        SELECT ile_osob, cena
+        FROM inserted;
+    END
+END;
 
 ```
+
+**Opis:** Trigger zapobiega wstawianiu zduplikowanych rekordów do tabeli typ_pokoju. W momencie próby dodania nowego typu pokoju, trigger ten sprawdza, czy już istnieje rekord powiązany z danym typem pokoju. Jeśli taki rekord już istnieje, operacja jest przerywana, a użytkownik otrzymuje komunikat o błędzie.
+
+![](./screeny/zduplikowany-typ-pokoju.png)
 
 ---
 
