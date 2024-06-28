@@ -42,5 +42,5 @@ Wojciech K:
 - ~~Kacper - procedura rezerwacji, dodanie klienta  ddl i screen~~
 
 - ~~Marcin - przypadki uzycia  procedura kiedy wolny pokoj~~  
-- Adam - Modyfikacja rezerwacji 
+- ~~Adam - Modyfikacja rezerwacji~~ 
 - Kapcer - proc dodawanie rezerwacji nie dzial dla jednego pokoju
