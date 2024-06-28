@@ -633,24 +633,10 @@ end;
 
 ```
 
-**Opis:** TODO: Dodanie opisu - Kacper
+**Opis:** Procedura dodaje rezerwacje do tabeli rezerwacje
 
-TODO: Dodanie screena
+![](./screeny/dodanie-rezerwaacji.png)
 
-Przykład
-
-```sql
-DECLARE @idPokoju dbo.idPokoju;
-INSERT INTO @idPokoju VALUES (1), (2);
-
-DECLARE @idUslugi dbo.idUslugi;
-INSERT INTO @idUslugi VALUES (1), (2);
-
-DECLARE @idWyzywienia dbo.idWyzywienia;
-INSERT INTO @idWyzywienia VALUES (1), (2);
-
-exec p_dodanie_rezerwacji 5, '2023-05-05', '2023-05-12', 3, 5, @idWyzywienia, @idUslugi, @idPokoju
-```
 
 
 ---
@@ -1098,5 +1084,18 @@ select dbo.f_calkowity_koszt(20) as calkowity_koszt   /*( ) - id_rezerwacji*/
 -- Pracownik chce sprawdzić kiedy pokój zostanie zwolniony
 
 EXEC dbo.p_zwolniony_pokoj @room_id = 2 ;
+
+-- dodanie rezerewacji
+
+DECLARE @idPokoju dbo.idPokoju;
+INSERT INTO @idPokoju VALUES (1), (2);
+
+DECLARE @idUslugi dbo.idUslugi;
+INSERT INTO @idUslugi VALUES (1), (2);
+
+DECLARE @idWyzywienia dbo.idWyzywienia;
+INSERT INTO @idWyzywienia VALUES (1), (2);
+
+exec p_dodanie_rezerwacji 5, '2023-05-05', '2023-05-12', 3, 5, @idWyzywienia, @idUslugi, @idPokoju
 
 ```
