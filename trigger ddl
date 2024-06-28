@@ -1,0 +1,57 @@
+Trigger ddl (na cala baze)
+wpisuje logi do tabeli log
+tabela log:
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[system_log](
+	[log_id] [int] IDENTITY(1,1) NOT NULL,
+	[log_data] [datetime] NOT NULL,
+	[typ] [nvarchar](50) NOT NULL,
+	[tabela] [nvarchar](20) NOT NULL,
+	[opis] [nvarchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[log_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[system_log] ADD  DEFAULT (getdate()) FOR [log_data]
+GO
+
+trigger:
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TRIGGER [trg_logi_bazy]
+ON DATABASE
+FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE, 
+    CREATE_PROCEDURE, ALTER_PROCEDURE, DROP_PROCEDURE, 
+    CREATE_FUNCTION, ALTER_FUNCTION, DROP_FUNCTION
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @log_data XML;
+    DECLARE @typ NVARCHAR(50);
+    DECLARE @tabela NVARCHAR(20);
+    DECLARE @opis NVARCHAR(MAX);
+
+    SET @log_data = EVENTDATA();
+    SET @typ = @log_data.value('(/EVENT_INSTANCE/EventType)[1]', 'NVARCHAR(50)');
+    SET @tabela = @log_data.value('(/EVENT_INSTANCE/ObjectName)[1]', 'NVARCHAR(20)');
+    SET @opis = @log_data.value('(/EVENT_INSTANCE/TSQLCommand)[1]', 'NVARCHAR(MAX)');
+    
+    INSERT INTO system_log (typ, tabela, opis)
+    VALUES (@typ, @tabela, @opis);
+END;
+GO
+ENABLE TRIGGER [trg_logi_bazy] ON DATABASE
+GO
+
+
+mozna przy opisie dodac ze trzeba bylo  zrobic tabele system_log 
+
+
