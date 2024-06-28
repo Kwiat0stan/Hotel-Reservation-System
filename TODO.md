@@ -22,7 +22,7 @@ Wojciech K:
 
 - ~~przeniesienie insertow z dokumentacji~~ 
 
-- dodanie triggera do tabeli typ_pokoju  
+- ~~dodanie triggera do tabeli typ_pokoju~~  
 
 - ~~dodanie procedury czy kiedy pokoj bedzie wolny kod, scree, uzycie~~
 
