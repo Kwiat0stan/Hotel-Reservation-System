@@ -542,23 +542,7 @@ END;
 
 ```sql
 
-CREATE TYPE dbo.idWyzywienia AS TABLE
-(
-    ID INT
-);
-
-CREATE TYPE dbo.idUslugi AS TABLE
-(
-    ID INT
-);
-
-CREATE TYPE dbo.idPokoju AS TABLE
-(
-    ID INT
-);
-
-GO
-CREATE or ALTER PROCEDURE p_dodanie_rezerwacji
+CREATE   PROCEDURE [dbo].[p_dodanie_rezerwacji]
 @id_klienta int, @data_zameldowania date, @data_wymeldowania date, @id_status int, @rabat int, @idWyzywienia dbo.idWyzywienia READONLY, @idUslugi dbo.idUslugi READONLY, @idPokoju dbo.idPokoju READONLY
 as
 begin
@@ -576,13 +560,10 @@ begin
 	FROM @idPokoju
 	WHERE EXISTS
 		(
-		SELECT id
-		FROM vw_specyfikacja_pokoju
-		WHERE id IN (
-			SELECT DISTINCT id
+		SELECT id_pokoju
 			FROM vw_rezerwacja
-			WHERE id NOT IN (
-				SELECT id
+			WHERE id_pokoju NOT IN (
+				SELECT id_pokoju
 				FROM vw_rezerwacja
 				WHERE ((data_zameldowania < @data_wymeldowania AND data_wymeldowania > @data_zameldowania)
 				OR (data_zameldowania >= @data_zameldowania AND data_zameldowania < @data_wymeldowania)
@@ -590,7 +571,6 @@ begin
 				OR (data_zameldowania <= @data_zameldowania AND data_wymeldowania >= @data_wymeldowania))
 				AND status != 'anulowane'
 			)
-		)
 		)
 	)
 	throw 50001, 'Co najmniej jeden z pokoi jest już zarezerwowanych w tym okresie', 1;
