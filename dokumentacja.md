@@ -767,6 +767,16 @@ END;
 
 ![Zwolniony pokoj](./screeny/zwolnieniepokoju.png)
 
+### Modyfikacja rezeracji - adam
+
+```sql
+
+```
+
+**Opis:**
+
+![]()
+
 
 
 ## Funkcje
@@ -1097,5 +1107,9 @@ DECLARE @idWyzywienia dbo.idWyzywienia;
 INSERT INTO @idWyzywienia VALUES (1), (2);
 
 exec p_dodanie_rezerwacji 5, '2023-05-05', '2023-05-12', 3, 5, @idWyzywienia, @idUslugi, @idPokoju
+
+-- klient chce przedluzyc pobyt
+
+dodanie przykladu kodu - adam
 
 ```
