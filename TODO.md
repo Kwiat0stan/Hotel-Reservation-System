@@ -24,7 +24,7 @@ Wojciech K:
 
 - dodanie triggera do tabeli typ_pokoju  
 
-- dodanie procedury czy kiedy pokoj bedzie wolny kod, scree, uzycie
+- ~~dodanie procedury czy kiedy pokoj bedzie wolny kod, scree, uzycie~~
 
 **Others:** 
 - ~~poprawnić procedure dodawanie rezerwacji - Kacper~~  
@@ -38,9 +38,9 @@ Wojciech K:
 
 ---
            
-- Bartek L - trigger typ uslugi i do logow  
+- ~~Bartek L - trigger do logow~~  
 - ~~Kacper - procedura rezerwacji, dodanie klienta  ddl i screen~~
 
-- Marcin - przypadki uzycia   / przedluzenie terminu, procedura kiedy wolny pokoj  
+- ~~Marcin - przypadki uzycia  procedura kiedy wolny pokoj~~  
 - Adam - Modyfikacja rezerwacji 
 
