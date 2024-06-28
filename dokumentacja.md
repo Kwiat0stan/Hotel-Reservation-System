@@ -1175,8 +1175,9 @@ INSERT INTO @idWyzywienia VALUES (1), (2);
 
 exec p_dodanie_rezerwacji 5, '2023-05-05', '2023-05-12', 3, 5, @idWyzywienia, @idUslugi, @idPokoju
 
--- klient chce przedluzyc pobyt
+-- klient chce przedluzyc rezerwacje
 
-dodanie przykladu kodu - adam
+select * from rezerwacje where id = 40
+exec p_przedluzenie_rezerwacji 40, '2024-08-15'
 
 ```
